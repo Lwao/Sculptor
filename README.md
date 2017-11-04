@@ -1,9 +1,15 @@
 # Sculptor
 Deve ser desenvolvida uma classe, denominada Sculptor, que permite a definição de objetos 3D a partir da composição de formas simples. O modelo gerado deve poder ser exportado em um formato de descrição 3D (formato OFF). 
 
-Especificação o proejto:
+Especificação o projeto:
 
    https://www.dropbox.com/s/ytsidppb8ad4s1k/sculptor-especificacao.pdf?dl=0
+   
+   
+Links de interesse:
+
+   http://people.sc.fsu.edu/~jburkardt/data/off/off.html
+
 
 Visualizadores de arquivos .off:
     
@@ -20,6 +26,4 @@ Visualizadores de arquivos .off:
         - MeshLab;
         - Roftview;
         
-Links de interesse:
 
-   http://people.sc.fsu.edu/~jburkardt/data/off/off.html
