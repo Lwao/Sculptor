@@ -17,7 +17,9 @@ struct Voxel
 class Sculptor
 {
 private:
-    int x, y, z;
+    Voxel temp;
+    int x, y, x;
+    vector<Voxel>::iterator var;
     vector< vector< vector <Voxels> > > H;
 
 public:
@@ -27,12 +29,12 @@ public:
     void cutVoxel(int x, int y, int z);
     void putBox(int x0, int x1, int y0, int y1, int xz, int z1);
     void cutBox(int x0, int x1, int y0, int y1, int xz, int z1);
-    putSphere(int xc, int yc, int zc, int r);
-    cutSphere(int xc, int yc, int zc, int r);
-    putEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
-    cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
-    cleanVoxels();
-    write();
+    void putSphere(int xc, int yc, int zc, int r);
+    void cutSphere(int xc, int yc, int zc, int r);
+    void putEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
+    void cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
+    void cleanVoxels();
+    void write();
 
 }
 
