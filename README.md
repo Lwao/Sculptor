@@ -57,8 +57,8 @@ Visualizadores de arquivos .off:
 
       2.1.1) Para fazer os ajustes, comapre os limites da forma, dados pelos vértices do seu cubo envolvente, com os limites atuais da matriz, expandindo-os se for o caso para poder conter a nova forma;
 
-         2.1.1.1) Para formas rotacionadas, a determnação dos limites x, y e z do cubo envolvente pode ser feita analisando os 8 pontos que correspondem aos vértices do cubo envolvente não rotacionado, expresso no sistema de coordenadas rotacionado;
+      2.1.1.1) Para formas rotacionadas, a determnação dos limites x, y e z do cubo envolvente pode ser feita analisando os 8 pontos que correspondem aos vértices do cubo envolvente não rotacionado, expresso no sistema de coordenadas rotacionado;
 
-         2.1.1.2) Apenas as formas aditivas (put__) alteram eventuamente as dimensões da matriz;
+      2.1.1.2) Apenas as formas aditivas (put__) alteram eventuamente as dimensões da matriz;
 
    2.2) Após dimensionada a matriz, cada forma é discretizada (esuclpida) na matriz;
