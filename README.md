@@ -38,7 +38,7 @@ Visualizadores de arquivos .off:
 
 <h4>
     <font color="#c9040a"> 1) </font>
-</h4> Imagine o objeto [MENTALMENTE];
+ Imagine o objeto [MENTALMENTE];</h4>
 
 2) Decomponha o objeto em formas aditivas e/ou subtrativas "simples" que façam aprte da sua classe Sculptor [MENTALMENTE];
 
