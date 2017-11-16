@@ -54,14 +54,13 @@ Visualizadores de arquivos .off:
 </h4>
 <h4>
     <font color="#c9040a"> 4) </font>
- Execute o programa, que deve gerar como resultado final um arquivo em formato .off cotendo a escultura do objeto desejado;
+ <b>Execute o programa, que deve gerar como resultado final um arquivo em formato .off cotendo a escultura do objeto desejado;</b>
 </h4>
 
 <h3>
     <font color="#c9040a"> EXECUÇÃO DO PROGRAMA </font>
 </h3>
-<t> sdffg
-   </t>
+
 
 1) Crie uma "matriz" 3D de voxels, inicialmente com dimensões e origem nulas, para armazenar a representação discretizada do objeto;
 
