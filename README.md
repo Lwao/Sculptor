@@ -60,6 +60,8 @@ Visualizadores de arquivos .off:
 <h3>
     <font color="#c9040a"> EXECUÇÃO DO PROGRAMA </font>
 </h3>
+<title> sdffg
+   </title>
 
 1) Crie uma "matriz" 3D de voxels, inicialmente com dimensões e origem nulas, para armazenar a representação discretizada do objeto;
 
