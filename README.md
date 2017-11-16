@@ -27,9 +27,14 @@ Visualizadores de arquivos .off:
         - Roftview;
         
 
-# DESCRIÇÃO GLOBAL DO PROJETO
+<h2>
+    <font color="#c9040a"> Descrição global do projeto </font>
+</h2>
 
-*ETAPAS DA ESCULTURA
+<h3>
+    <font color="#c9040a"> ETAPAS DA ESCULTURA </font>
+</h3>
+
 
 1) Imagine o objeto [MENTALMENTE];
 
@@ -41,7 +46,9 @@ Visualizadores de arquivos .off:
 
 4) Execute o programa, que deve gerar como resultado final um arquivo em formato .off cotendo a escultura do objeto desejado;
 
-*EXECUÇÃO DO PROGRAMA
+<h3>
+    <font color="#c9040a"> EXECUÇÃO DO PROGRAMA </font>
+</h3>
 
 1) Crie uma "matriz" 3D de voxels, inicialmente com dimensões e origem nulas, para armazenar a representação discretizada do objeto;
 
