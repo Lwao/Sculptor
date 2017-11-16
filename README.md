@@ -38,15 +38,24 @@ Visualizadores de arquivos .off:
 
 <h4>
     <font color="#c9040a"> 1) </font>
- Imagine o objeto [MENTALMENTE];</h4>
-
-2) Decomponha o objeto em formas aditivas e/ou subtrativas "simples" que façam aprte da sua classe Sculptor [MENTALMENTE];
-
-2.1) Se for o caso, defina novas primitivas para a classe Sculptor;
-
-3) Faça o código-fonte que chama cada uma das primitivas (put__, cut__) na ordem apropriada;
-
-4) Execute o programa, que deve gerar como resultado final um arquivo em formato .off cotendo a escultura do objeto desejado;
+ Imagine o objeto [MENTALMENTE];
+</h4>
+<h4>
+    <font color="#c9040a"> 2) </font>
+ Decomponha o objeto em formas aditivas e/ou subtrativas "simples" que façam aprte da sua classe Sculptor [MENTALMENTE];
+</h4>
+<h5>
+    <font color="#c9040a"> 2.1) </font>
+ Se for o caso, defina novas primitivas para a classe Sculptor;
+</h5>
+<h4>
+    <font color="#c9040a"> 3) </font>
+ Faça o código-fonte que chama cada uma das primitivas (put__, cut__) na ordem apropriada;
+</h4>
+<h4>
+    <font color="#c9040a"> 4) </font>
+ Execute o programa, que deve gerar como resultado final um arquivo em formato .off cotendo a escultura do objeto desejado;
+</h4>
 
 <h3>
     <font color="#c9040a"> EXECUÇÃO DO PROGRAMA </font>
