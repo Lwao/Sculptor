@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include "sculptor.h"
-
+//testing
 
 void Sculptor::setColor(float red, float green, float blue, float alpha)
 {
