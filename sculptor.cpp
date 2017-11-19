@@ -3,8 +3,12 @@
 #include <limits>
 #include <fstream>
 #include <iomanip>
+#include <vector>
+#include <list>
 #include "sculptor.h"
-//testing
+#include "shapes.h"
+#include "s_matrix.h"
+
 
 void Sculptor::setColor(float red, float green, float blue, float alpha)
 {
@@ -15,24 +19,17 @@ void Sculptor::setColor(float red, float green, float blue, float alpha)
 }
 void Sculptor::putVoxel(int x, int y, int z)
 {
-    H[x][y][z] = temp;
-    H[x][y][z].is_on = true;
+
 }
 void Sculptor::cutVoxel(int x, int y, int z)
 {
-    H[x][y][z] = temp;
-    H[x][y][z].is_on = false;
+
 }
-void Sculptor::putBox(int x0, int x1, int y0, int y1, int xz, int z1)
+void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
     
-    for (var = H.begin(); var!=H.end(); var++)
-    {
-        
-    }
-    H.push_back(putVoxel())
 }
-void Sculptor::cutBox(int x0, int x1, int y0, int y1, int xz, int z1)
+void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
 }
 void Sculptor::putSphere(int xc, int yc, int zc, int r)
