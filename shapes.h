@@ -20,14 +20,18 @@ class Shape
 {
 private:
     int 
+    int angulo;
+    double centro;
+    double xmax, xmin, ymax, ymin, zmax, zmin //Extremos
     double Dx, Dy, Dz //tamanho da forma (cubo circundante)
     double origem[3]; //origem
     vector <Coordenada> v;
 public:
-    getSize();
-    getOrigem();
-    getVertice();
-    
+    virtual getSize();
+    virtual getOrigem();
+    virtual getVertice();
+    virtual getMax();
+    virtual getMin();
     
 }
 
