@@ -62,3 +62,15 @@ Visualizadores de arquivos .off:
       2.1.1.2) Apenas as formas aditivas (put__) alteram eventuamente as dimensões da matriz;
 
    2.2) Após dimensionada a matriz, cada forma é discretizada (esuclpida) na matriz;
+   
+      2.2.1) Percorra (3 for aninhados, um para cada eixo de coordenadas) todos os voxels do cubo envolvente rotaciano. Para cada voxel:
+      
+      2.2.1.1) Calcule as coordenadas do centro do voxel no sistema de coordenadas não rotacionado;
+      
+      2.2.1.2) Verifique se o ponto não rotacionado pertence ou não à forma, e se for o caso altere na matriz, sempre verificando se os índices não estão fora da faixa. Lembrar também de fazer as conversões de coordenadas para índice;
+   
+   2.3) Após concluída a geração da matriz, faça a otimização para eliminar os voxels completamente oclusos;
+   
+   2.4) Em seguida, gere o arquivo .off:
+   
+      2.4.1) Gere todos os vértices que descrevem a matriz.
