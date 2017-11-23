@@ -74,3 +74,12 @@ Visualizadores de arquivos .off:
    2.4) Em seguida, gere o arquivo .off:
    
       2.4.1) Gere todos os vértices que descrevem a matriz.
+      
+ 
+OBS: Ângulos azimute, atque e rotação.
+
+putEllip(xc, yc, zc, xr, yr, zr, teta-y, alfa-z, beta-x)
+
+teta-y = azimute
+alfa-z = ataque
+beta-x = rotação
