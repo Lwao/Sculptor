@@ -26,7 +26,7 @@ private:
     //vector<Voxel>::iterator var;
     //vector <Voxels> H;
     ptr_Shape *pformas;
-
+    Hipermatriz H;
 
 public:
     
