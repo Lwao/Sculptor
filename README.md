@@ -83,3 +83,6 @@ putEllip(xc, yc, zc, xr, yr, zr, teta-y, alfa-z, beta-x)
 teta-y = azimute
 alfa-z = ataque
 beta-x = rotação
+
+OBS: Nao repetir voxels.
+      Verificar se o voxel é totalmente cercado, assim não contando seus vértices.
