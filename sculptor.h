@@ -15,7 +15,8 @@ struct Voxel
     bool is_on; // Included or not
 };
 
-
+list<Shape> x;
+list<Shape>::iterator k;
 
 class Sculptor
 {
@@ -25,8 +26,7 @@ private:
     //vector<Voxel>::iterator var;
     //vector <Voxels> H;
     ptr_Shape *pformas;
-    list<Shape> x;
-    list<Shape>::iterator k;
+
 
 public:
     
