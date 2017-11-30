@@ -22,13 +22,20 @@ private:
     int 
     double teta-y, alfa-z, beta-x;
     Coordenada centro;
-    Coordenada MAX; //extremos
+    Coordenada MAX; //extremos para a matriz envolvente
     Coordenada MIN;
     Coordenada Tamanho; //tamanho do Box circudnante (variação)
     Coordenada Origem;
-    vector <Coordenada> v;
+    vector <Coordenada> vert; //vértices
 public:
-    Shape(double teta-y=0, double alfa-z=0, double beta-x=0);
+    Shape(): teta-y(0), alfa-z(0), beta-x(0), 
+         centro.axisX(0), centro.axisY(0), centro.axisZ(0),
+         MAX.axisX(0), MAX.axisY(0), MAX.axisZ(0),
+         MIN.axisX(0), MIN.axisY(0), MIN.axisZ(0){}
+    inline ~Shape() {teta-y=0, alfa-z=0, beta-x=0, 
+         centro.axisX=0, centro.axisY=0, centro.axisZ=0,
+         MAX.axisX=0, MAX.axisY=0, MAX.axisZ=0,
+         MIN.axisX=0, MIN.axisY=0, MIN.axisZ=0}
     virtual getSize();
     virtual getOrigem();
     virtual getVertice();
@@ -42,12 +49,18 @@ class Box public Shape
 private:
     double x0, x1, y0, y1, z0, z1;
 public:
-    Box(): x0(0), x1(0), y0(0), y10(0), z0(0), z1(0), Shape() {}
+    Box(): x0(0), x1(0), y0(0), y1(0), z0(0), z1(0), Shape() {}
     explicit Box(double x0, double x1, double y0, double y1, double z0, double z1, teta-y=0, alfa-z=0, beta-x=0);
     Box(const Box &form);
     inline ~Box() {x0(0), x1(0), y0(0), y10(0), z0(0), z1(0), teta-y=0, alfa-z=0, beta-x=0;}
     
     void operator=(const Box &form);
+    
+    getSize();
+    getOrigem();
+    getVertice();
+    getMax();
+    getMin();
 }
 
 class Sphere public Shape
@@ -62,6 +75,12 @@ public:
     inline ~Sphere() {x_c(0), y_c(0), z_c(0), teta-y=0, alfa-z=0, beta-x=0;}
     
     void operator=(const Sphere &form);
+    
+    getSize();
+    getOrigem();
+    getVertice();
+    getMax();
+    getMin();
 }
 
 class Ellipsoid public Shape
@@ -77,6 +96,12 @@ public:
     inline ~Ellipsoid() {x_c(0), y_c(0), z_c(0), x_r(0), y_r(0), z_r(0), teta-y=0, alfa-z=0, beta-x=0;}
     
     void operator=(const Ellipsoid &form);
+    
+    getSize();
+    getOrigem();
+    getVertice();
+    getMax();
+    getMin();
 }
 
 
