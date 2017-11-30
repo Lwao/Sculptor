@@ -15,10 +15,13 @@ class Hipermatriz
 private:
     vector<Voxel>::iterator var;
     vector <Voxels> H;
-    double x, y, z //coordenadas ou tamanho
+    unsigned x, y, z //coordenadas ou tamanho
 public:
+    Hipermatriz(): x(0), y(0), z(0) {}
+    explicit Hipermatriz();
+    ~Hipermatriz();
     
-    
+    inserirForma();
     Redimensionar(); //inserir forma 
     definirOrigem(); //primeira forma (vértice com menor 
     
