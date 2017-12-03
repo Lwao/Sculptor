@@ -8,3 +8,5 @@
 #include "sculptor.h"
 #include "shapes.h"
 #include "s_matrix.h"
+
+using namespace std;
