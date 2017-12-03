@@ -15,12 +15,13 @@ struct Voxel
     bool is_on; // Incluir ou não
 };
 
-list<ptr_Shape*> lista;
-list<ptr_Shape*>::iterator k;
+
+typedef list <ptr_Shape*>::iterator it_lista;
 
 class Sculptor
 {
 private:
+    list<ptr_Shape*> lista;
     Hipermatriz H; //matriz para armazenar as formas//preenchida ao chamar write()
     double R, G, B, trans; //cores a serem modificadas no setColor()
 public:
@@ -37,7 +38,8 @@ public:
     void cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
     void cleanVoxels(); //chama após discretizar todas as formas na matriz
     void write();
-
+    
+    
     /* CASO HAJA NECESSIDADE DE DEIXAR COM OS ÂNGULOS AQUI
     void putVoxel(int x, int y, int z, double teta-y=0, double alfa-z=0, double beta-x=0);
     void cutVoxel(int x, int y, int z, double teta-y=0, double alfa-z=0, double beta-x=0);

@@ -10,20 +10,27 @@
 
 using namespace std;
 
+typedef vector<Voxel>::iterator it_matriz;
+
 class Hipermatriz
 {
 private:
-    vector<Voxel>::iterator var;
     vector <Voxels> H;
-    unsigned tamX, tamY, tamZ //coordenadas ou tamanho
+    unsigned tamX, tamY, tamZ //coordenadas ou tamanho em voxels
+    Coordenada origem; //coordenadas da origem no mundo
+    Coordenada MAX, MIN; //máximo e mínimo
 public:
     inline explicit Hipermatriz(unsigned x, unsigned y, unsigned z): tamX(x), tamY(y), tamZ(z) {}
     ~Hipermatriz();
     
     void inserirForma(); //discretizar ou esculpir a forma na matriz
-    void Redimensionar(); //ao inserir uma forma (aditivamente), redimensionar 
-    void definirOrigem(); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
     
+    //Redimensionar ao inserir uma forma na lista
+    void Redimensionar(const Coordenada &cubo_real); //ao inserir uma forma (aditivamente), redimensionar 
+    void definirOrigem(const Coordenada &cubo_real); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
+    
+    void getNvertices();
+    void getNfaces();
     
     
 }

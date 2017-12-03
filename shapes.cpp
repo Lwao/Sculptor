@@ -52,10 +52,100 @@ struct Coordenada operator/(const double op)
     return prov;
 }
 
+//SHAPE
+
+void Shape::operator=(const Shape& form)
+{
+    *this->tetay = form.tetay;
+    *this->alfaz = form.alfaz;
+    *this->betax = form.betax;
+    *this->red = form.red;
+    *this->green = form.green;
+    *this->blue = form.blue;
+    *this->alpha = form.alpha;
+    *this->state = form.state;  
+}
+
+void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figura da especificação
+{
+    Coordenada temp;
+    
+    EXT[0] = getMIN();
+    EXT[1] = getMAX();
+    
+    /* VÉRTICES
+                      0                 4
+                       . . . . . . . . .
+                    .  .            .  .
+               1 . . . . . . . . . 5   .
+                 .     .         .     .
+                 .     .         .     .
+                 .     .         .     .
+                 .   3 . . . . . . . . . 7
+                 .  .            .  .
+               2 . . . . . . . . . 6
+
+    */
+    //P0 (MIN.x, MAX.y, MIN.z)
+    //P1 (MIN.x, MAX.y, MAX.z)
+    //P2 (MIN.x, MIN.y, MAX.z)
+    //P3 (MIN.x, MIN.y, MIN.z)
+    //P4 (MAX.x, MAX.y, MIN.z) 
+    //P5 (MAX.x, MAX.y, MAX.z)
+    //P6 (MAX.x, MIN.y, MAX.z) 
+    //P7 (MAX.x, MIN.y, MIN.z)
+    
+    unsigned count(0);
+
+    for (unsigned i=0; i<=1; i++)
+    {
+        for (unsigned j=1; j>=0; j--)
+        {
+            if(count==2)
+            {
+                for(unsigned k=1; k>=0; k--)
+                {
+                    temp.X = EXT[i].X;
+                    temp.Y = EXT[j].Y;
+                    temp.Z = EXT[k].Z
+                    vert.push_back(temp); 
+                    count--;
+                }
+            }
+            if(count==0)
+            {
+                for(unsigned k=0; k<=1; k++)
+                {
+                    temp.X = EXT[i].X;
+                    temp.Y = EXT[j].Y;
+                    temp.Z = EXT[k].Z
+                    vert.push_back(temp); 
+                    count++;
+                }
+            }
+        }
+    }
+}
+
+
+
 //BOX
 
 Coordenada Box::Box(const Box& form)
 {
+}
+void Box::operator=(const Box& form)
+{
+    *this->x0 = form.x0;
+    *this->x1 = form.x1;
+    *this->y0 = form.y0;
+    *this->y1 = form.y1;
+    *this->z0 = form.z0;
+    *this->z1 = form.z1;
+}
+Box::Box(const Box& form)
+{
+    *this = form;
 }
 
 Coordenada Box::getMAX() const
@@ -97,9 +187,7 @@ Coordenada Box::getSize() const
     
     return prov;
 }
-Coordenada Box::getVertice() const
-{
-}
+
 
 
 //SPHERE
@@ -107,6 +195,18 @@ Coordenada Box::getVertice() const
 Sphere::Sphere(const Sphere& form)
 {
 }
+void Sphere::operator=(const Sphere& form)
+{
+    *this->x_c = form.x_c;
+    *this->y_c = form.y_c;
+    *this->z_c = form.z_c;
+    *this->r = form.r;
+}
+Sphere::Sphere(const Sphere& form)
+{
+    *this = form;
+}
+
 Coordenada Sphere::getMAX() const
 {
     Coordenada prov;
@@ -161,6 +261,20 @@ Coordenada Sphere::getVertice() const
 Ellipsoid::Ellipsoid(const Ellipsoid& form)
 {
 }
+void Ellipsoid::operator=(const Ellipsoid& form)
+{
+    *this->x_c = form.x_c;
+    *this->y_c = form.y_c;
+    *this->z_c = form.z_c;
+    *this->x_r = form.x_r;
+    *this->y_r = form.y_r;
+    *this->z_r = form.z_r;
+}
+Ellipsoid::Ellipsoid(const Ellipsoid& form)
+{
+    *this = form;
+}
+
 Coordenada Ellipsoid::getMAX() const
 {
     Coordenada prov;

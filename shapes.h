@@ -33,16 +33,17 @@ private:
     //Coordenada Tamanho; //tamanho do Box circundante (variação)
     //Coordenada Origem;
         
-    double teta-y, alfa-z, beta-x;
+    double tetay, alfaz, betax;
     double red, green, blue, alpha;
     bool state;
     
     vector <Coordenada> vert; //coordenadas do cubo envolvente
     Coordenada EXT[2]; //EXTREMOS, primeira entrada o ponto mínimo, segunda entrada o ponto máximo
 public:
-    Shape(): teta-y(0), alfa-z(0), beta-x(0), red(0), green(0), blue(0), alpha(1), state(false){}
-    inline ~Shape() {teta-y=0, alfa-z=0, beta-x=0, red=0, green=0, blue=0, alpha=0, state=false;}
+    Shape(): tetay(0), alfaz(0), betax(0), red(0), green(0), blue(0), alpha(1), state(false){}
+    inline ~Shape() {tetay=0, alfaz=0, betax=0, red=0, green=0, blue=0, alpha=0, state=false;}
          
+    void operator=(const Shape &form);
     virtual ptr_Shape clone() const = 0;
     
     
@@ -51,7 +52,7 @@ public:
     virtual Coordenada getCentro() const = 0;
     virtual Coordenada getOrigem() const =0;
     virtual Coordenada getSize() const = 0;
-    virtual Coordenada getVertice() const =0; //retor
+    virtual void detCuboEnv() const; //retor
     
 }
 
@@ -63,7 +64,7 @@ public:
     Box(): x0(0), x1(0), y0(0), y1(0), z0(0), z1(0), Shape() {}
     explicit Box(double x0, double x1, double y0, double y1, double z0, double z1, double teta=0, double alfa=0, double beta=0);
     Box(const Box &form);
-    inline ~Box() {x0=0, x1=0, y0=0, y1=0, z0=0, z1=0, teta-y=0, alfa-z=0, beta-x=0;}
+    inline ~Box() {x0=0, x1=0, y0=0, y1=0, z0=0, z1=0, tetay=0, alfaz=0, betax=0;}
     
     void operator=(const Box &form);
     ptr_Shape clone() const {return new Box(*this);}
@@ -73,7 +74,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
-    Coordenada getVertice() const;
+    void detCuboEnv() const;
 }
 
 class Sphere: public Shape
@@ -85,7 +86,7 @@ public:
     Sphere(): x_c(0), y_c(0), z_c(0), r(0), Shape() {}
     explicit Sphere(double xc, double yc, double zc, double radius, double teta=0, double alfa=0, double beta=0);
     Sphere(const Sphere &form);
-    inline ~Sphere() {x_c=0, y_c=0, z_c=0, teta-y=0, alfa-z=0, beta-x=0;}
+    inline ~Sphere() {x_c=0, y_c=0, z_c=0, tetay=0, alfaz=0, betax=0;}
     
     void operator=(const Sphere &form);
     ptr_Shape clone() const {return new Sphere(*this);}
@@ -95,7 +96,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
-    Coordenada getVertice() const;
+    void detCuboEnv() const;
 }
 
 class Ellipsoid: public Shape
@@ -108,7 +109,7 @@ public:
     Ellipsoid(): x_c(0), y_c(0), z_c(0), x_r(0), y_r(0), z_r(0), Shape() {}
     explicit Ellipsoid(double x_c, double y_c, double z_c, double x_r, double y_r, double z_r, double teta=0, double alfa=0, double beta=0);
     Ellipsoid(const Ellipsoid &form);
-    inline ~Ellipsoid() {x_c=0, y_c=0, z_c=0, x_r=0, y_r=0, z_r=0, teta-y=0, alfa-z=0, beta-x=0;}
+    inline ~Ellipsoid() {x_c=0, y_c=0, z_c=0, x_r=0, y_r=0, z_r=0, tetay=0, alfaz=0, betax=0;}
     
     void operator=(const Ellipsoid &form);
     ptr_Shape clone() const {return new Ellipsoid(*this);}
@@ -118,7 +119,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
-    Coordenada getVertice() const;
+    void detCuboEnv() const;
 }
 
 
