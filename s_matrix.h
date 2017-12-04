@@ -10,27 +10,33 @@
 
 using namespace std;
 
+struct Voxel
+{
+    float r,g,b; // Cores
+    float a; // Transparência
+    bool is_on; // Incluir ou não
+};
+
 typedef vector<Voxel>::iterator it_matriz;
 
 class Hipermatriz
 {
 private:
-    vector <Voxels> H;
-    unsigned tamX, tamY, tamZ //coordenadas ou tamanho em voxels
-    Coordenada origem; //coordenadas da origem no mundo
-    Coordenada MAX, MIN; //máximo e mínimo
+    vector <Voxels> H; //matriz de voxels
+    unsigned tamX, tamY, tamZ //coordenadas ou tamanho em voxels (int)
+    Coordenada origem; //coordenadas da origem no mundo (double)
+    Coordenada MAX, MIN; //máximo e mínimo nas coordenadas do mundo (double)
 public:
     inline explicit Hipermatriz(unsigned x, unsigned y, unsigned z): tamX(x), tamY(y), tamZ(z) {}
     ~Hipermatriz();
     
     void inserirForma(); //discretizar ou esculpir a forma na matriz
-    
-    //Redimensionar ao inserir uma forma na lista
     void Redimensionar(const Coordenada &cubo_real); //ao inserir uma forma (aditivamente), redimensionar 
     void definirOrigem(const Coordenada &cubo_real); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
     
-    void getNvertices();
-    void getNfaces();
+    //PARA A IMPRESSÃO
+    void getNvertices(); //pega o número de vértices de todos os voxels
+    void getNfaces(); //pega o número de faces de todos os voxels
     
     
 }

@@ -14,15 +14,15 @@ using namespace std;
 
 void Sculptor::putVoxel(int x, int y, int z)
 {
-    //Box 1x1x1
-    lista.push_back(new Box(x-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, //posição
+    //Construção de Box 1x1x1
+    lista.push_back(new Box(x/1.0-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, //posição
                             0, 0, 0, //ângulos
                             R, G, B, trans, //cores
                             true); //estado
 }
 void Sculptor::cutVoxel(int x, int y, int z)
 {
-    //Box 1x1x1
+    //Subtração de Box 1x1x1
     lista.push_back(new Box(x-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, //posição
                             0, 0, 0, //ângulos
                             R, G, B, trans, //cores

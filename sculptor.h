@@ -8,25 +8,22 @@
 
 using namespace std;
 
-struct Voxel
-{
-    float r,g,b; // Cores
-    float a; // Transparência
-    bool is_on; // Incluir ou não
-};
 
 
-typedef list <ptr_Shape*>::iterator it_lista;
+
+typedef list <ptr_Shape>::iterator it_lista; //iterador para a lista
 
 class Sculptor
 {
 private:
-    list<ptr_Shape*> lista;
-    Hipermatriz H; //matriz para armazenar as formas//preenchida ao chamar write()
+    list<ptr_Shape> lista; //lista de formas
+    Hipermatriz H; //matriz para armazenar as formas
     double R, G, B, trans; //cores a serem modificadas no setColor()
 public:
+    //construtores e destrutores
     explicit inline Sculptor(double red=0, double green=0, double blue=0, double opacity=1): R(red), G(green), B(blue), trans(opacity) {}
     
+    //métodos 
     inline void setColor(float red, float green, float blue, float alpha) {this->R=red, this->G=green, this->B=blue, this->trans=alpha}
     void putVoxel(int x, int y, int z);
     void cutVoxel(int x, int y, int z);

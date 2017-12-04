@@ -70,8 +70,8 @@ void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figur
 {
     Coordenada temp;
     
-    EXT[0] = getMIN();
-    EXT[1] = getMAX();
+    EXT[0] = getMIN(); //preenche com a coordenada mínima
+    EXT[1] = getMAX(); //preenche com a coordenada máxima
     
     /* VÉRTICES
                       0                 4
@@ -94,6 +94,8 @@ void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figur
     //P5 (MAX.x, MAX.y, MAX.z)
     //P6 (MAX.x, MIN.y, MAX.z) 
     //P7 (MAX.x, MIN.y, MIN.z)
+    
+    //O algoritmo abaixo irá passar pelos vértices do cubo envolvente de acordo com os ponts dados acima
     
     unsigned count(0);
 
@@ -131,8 +133,20 @@ void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figur
 
 //BOX
 
-Coordenada Box::Box(const Box& form)
+Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta, double alfa, double beta)
 {
+    Shape();
+    
+    x0 = xi;
+    x1 = xf;
+    y0 = yi;
+    y1 = yf;
+    z0 = zi;
+    z1 = zf;
+    
+    tetay = teta;
+    alfaz = alfa;
+    betax = beta;
 }
 void Box::operator=(const Box& form)
 {
@@ -192,6 +206,19 @@ Coordenada Box::getSize() const
 
 //SPHERE
 
+Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta)
+{
+    Shape();
+    
+    x_c = xc;
+    y_c = yc;
+    z_c = zc;
+    r = radius;
+    
+    tetay = teta;
+    alfaz = alfa;
+    betax = beta;
+}
 Sphere::Sphere(const Sphere& form)
 {
 }
@@ -257,7 +284,21 @@ Coordenada Sphere::getVertice() const
 
 //ELLIPSOID
 
-
+Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta)
+{
+    Shape();
+    
+    x_c = xc;
+    y_c = yc;
+    z_c = zc;
+    x_r = xr;
+    y_r = yr;
+    z_r = zr;
+    
+    tetay = teta;
+    alfaz = alfa;
+    betax = beta;
+}
 Ellipsoid::Ellipsoid(const Ellipsoid& form)
 {
 }

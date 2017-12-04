@@ -11,13 +11,15 @@
 
 using namespace std;
 
-void Hipermatriz::inserirForma()
+void Hipermatriz::inserirForma()//experimental
 {
     Coordenada cubo_env; //em coordenadas do mundo
+    ptr_Shape temp;
     
-    it_lista = lista.end()->clone(); // transforma o iterador da lista no último elemento inserido na lista
-    cubo_env = (*it_lista).getSize(); //o cubo envolvente assume o tamanho da coor MAX-MIN da forma 
+    it_lista = &(lista.end()->clone()); // transforma o iterador da lista no último elemento inserido na lista
     
+    temp = 
+    *temp.detCuboenv();
     
     
     Redimensionar(cubo_env);
@@ -26,9 +28,10 @@ void Hipermatriz::inserirForma()
     
     
 }
-void Hipermatriz::Redimensionar(const Coordenada &cubo_real)
+void Hipermatriz::Redimensionar(const Coordenada &cubo_real)//experimental
 {
     unsigned tX, tY, tZ;
+    
     
     
     //ARREDONDANDO PARA INT
@@ -68,7 +71,7 @@ void Hipermatriz::Redimensionar(const Coordenada &cubo_real)
         
     }
 }
-void Hipermatriz::definirOrigem(const Coordenada &cubo_real)
+void Hipermatriz::definirOrigem(const Coordenada &cubo_real)//experimental
 {
     //REDEFINIÇÃO DA ORIGEM
     if(cubo_real.X<origem.X) origem.X = cubo_real.X;
