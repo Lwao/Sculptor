@@ -11,73 +11,122 @@
 
 using namespace std;
 
-void Hipermatriz::inserirForma()//experimental
+void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
 {
-    Coordenada cubo_env; //em coordenadas do mundo
-    ptr_Shape temp;
+    Coordenada tamanho; //em coordenadas do mundo
+    ptr_Shape t;
+    vector <Coordenada> temp;
     
-    it_lista = &(lista.end()->clone()); // transforma o iterador da lista no último elemento inserido na lista
+    //Determinar cubo envolvente da forma
+    temp = form->getCuboEnv();
     
-    temp = 
-    *temp.detCuboenv();
+    //Ver quantos voxels equivale à forma
+    tamanho = form->getSize();
     
     
-    Redimensionar(cubo_env);
-    definirOrigem(cubo_env);
+    //Dimensionar matriz para caber os voxels, se a forma for aditiva
+    if(form->getState()) Redimensionar(temp, tamanho);
+    
+    //Esculpir os voxels
+    Esculpir(form);
+    
+    
     
     
     
 }
-void Hipermatriz::Redimensionar(const Coordenada &cubo_real)//experimental
+void Hipermatriz::Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size)//experimental
 {
     unsigned tX, tY, tZ;
     
     
     
     //ARREDONDANDO PARA INT
-    tX = (abs(cubo_real.X)+0.5);
-    tY = (abs(cubo_real.Y)+0.5);
-    tZ = (abs(cubo_real.Z)+0.5);
+    tX = (abs(size.X)+0.5);
+    tY = (abs(size.Y)+0.5);
+    tZ = (abs(size.Z)+0.5);
     
-    dimX
+    /* VÉRTICES
+                      0                 4
+                       . . . . . . . . .
+                    .  .            .  .
+               1 . . . . . . . . . 5   .
+                 .     .         .     .
+        y        .     .         .     .
+                 .     .         .     .
+                 .   3 . . . . . . . . . 7
+                 .  .            .  .             z
+               2 . . . . . . . . . 6
+
+                       x
+    */
+    //P0 (MIN.x, MAX.y, MIN.z)
+    //P1 (MIN.x, MAX.y, MAX.z)
+    //P2 (MIN.x, MIN.y, MAX.z)
+    //P3 (MIN.x, MIN.y, MIN.z)
+    //P4 (MAX.x, MAX.y, MIN.z) 
+    //P5 (MAX.x, MAX.y, MAX.z)
+    //P6 (MAX.x, MIN.y, MAX.z) 
+    //P7 (MAX.x, MIN.y, MIN.z)
     
-    //CONVERTER AS COORDENADAS DE CUBO_REAL PARA INTEIRO
     
-    //...
+    //Decidir quais eixos devem aumentar
+    if(tX>dimX) dimX=tX//redimensionar
+    else{} //não redimensionar
+    if(tY>dimY) dimY=tY //redimensionar
+    else{} //não redimensionar
+    if(tZ>dimZ) dimZ=tZ //redimensionar
+    else{} //não redimensionar
     
     
-    if(cubo_real.X>dimX)
-    {
-        
-    }
-    else
-    {
-        
-    }
-    if(cubo_real.Y>dimY)
-    {
-        
-    }
-    else
-    {
-        
-    }
-    if(cubo_real.Z>dimZ)
-    {
-        
-    }
-    else
-    {
-        
-    }
+    //Muda o tamanho da matriz (sempre crescendo)
+    H.resize(dimX*dimY*dimZ);
+    
+    //Redefinir a origem
+    definirOrigem(vertices, size);
 }
-void Hipermatriz::definirOrigem(const Coordenada &cubo_real)//experimental
+void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experimental
 {
+    //DEFINIÇÃO DA ORIGEM
+    if(qtd_formas==0)
+    {
+        //Se não possuía nenhuma forma até aí, definir a origem no vértice P1
+        origem = vertice[1];
+        qtd_formas++;
+    }
+    
+    
     //REDEFINIÇÃO DA ORIGEM
-    if(cubo_real.X<origem.X) origem.X = cubo_real.X;
-    if(cubo_real.Y<origem.Y) origem.Y = cubo_real.Y;
-    if(cubo_real.Z<origem.Z) origem.Z = cubo_real.Z;
+    //Mas caso já possui alguma forma (qtd_formas>=1
+    qtd_formas++;
+    
+    if(vertices[1].X<origem.X) origem.X = vertices[1].X;
+    else {}
+    if(vertices[1].Y<origem.Y) origem.Y = vertices[1].Y;
+    else {}
+    if(vertices[1].Z<origem.Z) origem.Z = vertices[1].Z;
+    else {}
     
 }
+void Hipermatriz::Esculpir(const ptr_Shape& form)
+{
+    for(unsigned i=0; i<dimX; i)
+    {
+        for(unsigned j=0; j<dimY; j)
+        {
+            for(unsigned k=0; k<dimZ; k)
+            {
+                H[tamX*i+j+tamX*tamY*k] = new Voxel()
+            }
+        }
+    }
+}
+void Hipermatriz::getNvertices()
+{
+}
+void Hipermatriz::getNfaces()
+{
+}
+
 
 

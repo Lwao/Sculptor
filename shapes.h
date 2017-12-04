@@ -35,9 +35,9 @@ private:
         
     double tetay, alfaz, betax; //ângulos
     double red, green, blue, alpha; //cores
-    bool state; //estado, se está ligado ou não
+    bool state; //estado, se está ligado ou não 
     
-    vector <Coordenada> vert; //coordenadas dos vértices do cubo envolvente (calculado por detCuboEnv()
+    //vector <Coordenada> vert; //coordenadas dos vértices do cubo envolvente (calculado por detCuboEnv()
     Coordenada EXT[2]; //EXTREMOS, primeira entrada o ponto mínimo, segunda entrada o ponto máximo
 public:
     //construtores e destrutores
@@ -55,8 +55,9 @@ public:
     virtual Coordenada getOrigem() const =0;
     virtual Coordenada getSize() const = 0;
     
-    //método
-    void detCuboEnv() const; //retor
+    //métodos
+    vector <Coordenada> getCuboEnv() const; //retor
+    inline bool getState() {return *this->state;}
     
 }
 

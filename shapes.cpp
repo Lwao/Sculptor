@@ -66,8 +66,9 @@ void Shape::operator=(const Shape& form)
     *this->state = form.state;  
 }
 
-void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figura da especificação
+vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices na ordem da figura da especificação
 {
+    vector <Coordenada> vert;
     Coordenada temp;
     
     EXT[0] = getMIN(); //preenche com a coordenada mínima
@@ -127,6 +128,7 @@ void Shape::detCuboEnv() const //preenche o vetor de vértices na ordem da figur
             }
         }
     }
+    return vert;
 }
 
 
