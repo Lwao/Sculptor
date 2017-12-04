@@ -55,9 +55,13 @@ public:
     virtual Coordenada getOrigem() const =0;
     virtual Coordenada getSize() const = 0;
     
-    //métodos
+    //métodos de consulta
     vector <Coordenada> getCuboEnv() const; //retor
     inline bool getState() {return *this->state;}
+    inline double getRed() {return *this->red;}
+    inline double getGreen() {return *this->green}
+    inline double getBlue() {return *this->blue;}
+    inline double getTransparency() {return *this->alpha;}
     
 }
 
@@ -82,6 +86,12 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
+    
+    //REGRA DE PREENCHIMENTO DO BOX//
+    // De x0 a x1 
+    // De y0 a y1 
+    // De z0 a z1 
+
 }
 
 class Sphere: public Shape
@@ -106,6 +116,11 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
+    
+    //REGRA DE PREENCHIMENTO DA SPHERE//
+    // De y0 a y1 
+    // De y0 a y1 
+    // De z0 a z1 
 }
 
 class Ellipsoid: public Shape

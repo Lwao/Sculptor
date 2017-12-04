@@ -11,28 +11,29 @@
 
 using namespace std;
 
-void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
+
+
+void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experimental
 {
-    Coordenada tamanho; //em coordenadas do mundo
-    ptr_Shape t;
-    vector <Coordenada> temp;
-    
-    //Determinar cubo envolvente da forma
-    temp = form->getCuboEnv();
-    
-    //Ver quantos voxels equivale à forma
-    tamanho = form->getSize();
+    //DEFINIÇÃO DA ORIGEM
+    if(qtd_formas==0)
+    {
+        //Se não possuía nenhuma forma até aí, definir a origem no vértice P1
+        origem = vertice[1];
+        qtd_formas++;
+    }
     
     
-    //Dimensionar matriz para caber os voxels, se a forma for aditiva
-    if(form->getState()) Redimensionar(temp, tamanho);
+    //REDEFINIÇÃO DA ORIGEM
+    //Mas caso já possui alguma forma (qtd_formas>=1
+    qtd_formas++;
     
-    //Esculpir os voxels
-    Esculpir(form);
-    
-    
-    
-    
+    if(vertices[1].X<origem.X) origem.X = vertices[1].X;
+    else {}
+    if(vertices[1].Y<origem.Y) origem.Y = vertices[1].Y;
+    else {}
+    if(vertices[1].Z<origem.Z) origem.Z = vertices[1].Z;
+    else {}
     
 }
 void Hipermatriz::Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size)//experimental
@@ -85,39 +86,39 @@ void Hipermatriz::Redimensionar(const vector <Coordenada> &vertices, const Coord
     //Redefinir a origem
     definirOrigem(vertices, size);
 }
-void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experimental
+void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
 {
-    //DEFINIÇÃO DA ORIGEM
-    if(qtd_formas==0)
-    {
-        //Se não possuía nenhuma forma até aí, definir a origem no vértice P1
-        origem = vertice[1];
-        qtd_formas++;
-    }
+    vector <Coordenada> temp;
+    Coordenada tamanho;
+    
+    //Determinar cubo envolvente da forma
+    temp = form->getCuboEnv();
+    
+    //Ver quantos voxels equivale à forma
+    tamanho = form->getSize();
     
     
-    //REDEFINIÇÃO DA ORIGEM
-    //Mas caso já possui alguma forma (qtd_formas>=1
-    qtd_formas++;
-    
-    if(vertices[1].X<origem.X) origem.X = vertices[1].X;
-    else {}
-    if(vertices[1].Y<origem.Y) origem.Y = vertices[1].Y;
-    else {}
-    if(vertices[1].Z<origem.Z) origem.Z = vertices[1].Z;
-    else {}
-    
+    //Dimensionar matriz para caber os voxels, se a forma for aditiva
+    if(form->getState()) Redimensionar(temp, tamanho);
 }
-void Hipermatriz::Esculpir(const ptr_Shape& form)
+void Hipermatriz::discretizar(const ptr_Shape& form)
 {
+    Voxel temp;
+    
+    //TIPO DE VOXEL A SER PREENCHIDO
+    temp.a = form.getTransparency();
+    temp.r = form.getRed();
+    temp.g = form.getGreen();
+    temp.b = form.getBlue();
+    temp.is_on = form.getState();
+    
+    
+    //PREENCHENDO NA MATRIZ
     for(unsigned i=0; i<dimX; i)
     {
         for(unsigned j=0; j<dimY; j)
         {
-            for(unsigned k=0; k<dimZ; k)
-            {
-                H[tamX*i+j+tamX*tamY*k] = new Voxel()
-            }
+            for(unsigned k=0; k<dimZ; k) H[tamX*i+j+tamX*tamY*k] = temp; //recebe o voxel
         }
     }
 }

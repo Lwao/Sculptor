@@ -32,10 +32,12 @@ public:
     inline explicit Hipermatriz(unsigned x, unsigned y, unsigned z): tamX(x), tamY(y), tamZ(z) {}
     ~Hipermatriz();
     
-    void inserirForma(ptr_Shape &form); //discretizar ou esculpir a forma na matriz
-    void Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size); //ao inserir uma forma (aditivamente), redimensionar 
     void definirOrigem(const vector <Coordenada> &vertices); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
-    void Esculpir(const ptr_Shape &form);
+    void Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size); //ao inserir uma forma (aditivamente), redimensionar 
+    void inserirForma(ptr_Shape &form); //ao inserir uma forma, redimensiona a matriz
+    
+    //Após dimensionar a matriz considerando todas as formas
+    void discretizar(const ptr_Shape &form);
     
     
     //PARA A IMPRESSÃO

@@ -10,7 +10,6 @@ using namespace std;
 
 
 
-
 typedef list <ptr_Shape>::iterator it_lista; //iterador para a lista
 
 class Sculptor
@@ -36,6 +35,8 @@ public:
     void cleanVoxels(); //chama após discretizar todas as formas na matriz
     void write();
     
+    
+    void Esculpir(); //Manda todas as formas para terem os voxels colocados na matriz
     
     /* CASO HAJA NECESSIDADE DE DEIXAR COM OS ÂNGULOS AQUI
     void putVoxel(int x, int y, int z, double teta-y=0, double alfa-z=0, double beta-x=0);

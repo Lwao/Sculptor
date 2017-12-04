@@ -76,3 +76,10 @@ void Sculptor::cleanVoxels()
 void Sculptor::write()
 {
 }
+void Sculptor::Esculpir();
+{
+    it_lista itt;
+    
+    for (itt = lista.begin(); itt != lista.end(); itt++) H.discretizar(*itt);
+                    
+}
