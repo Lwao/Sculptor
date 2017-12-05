@@ -80,6 +80,6 @@ void Sculptor::Esculpir();
 {
     it_lista itt;
     
-    for (itt = lista.begin(); itt != lista.end(); itt++) H.discretizar(*itt);
+    for (itt = lista.begin(); itt != lista.end(); itt++) Tela.discretizar(*itt);
                     
 }

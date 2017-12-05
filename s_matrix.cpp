@@ -19,7 +19,7 @@ void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experiment
     if(qtd_formas==0)
     {
         //Se não possuía nenhuma forma até aí, definir a origem no vértice P1
-        origem = vertice[1];
+        origem = vertices[1];
         qtd_formas++;
     }
     
@@ -106,28 +106,36 @@ void Hipermatriz::discretizar(const ptr_Shape& form)
     Voxel temp;
     
     //TIPO DE VOXEL A SER PREENCHIDO
-    temp.a = form.getTransparency();
-    temp.r = form.getRed();
-    temp.g = form.getGreen();
-    temp.b = form.getBlue();
-    temp.is_on = form.getState();
+    temp.a = form->getTransparency();
+    temp.r = form->getRed();
+    temp.g = form->getGreen();
+    temp.b = form->getBlue();
+    temp.is_on = form->getState();
+    
+   
     
     
     //PREENCHENDO NA MATRIZ
-    for(unsigned i=0; i<dimX; i)
+    for(unsigned i=0; i<tamX; i)
     {
-        for(unsigned j=0; j<dimY; j)
+        for(unsigned j=0; j<tamY; j)
         {
-            for(unsigned k=0; k<dimZ; k) H[tamX*i+j+tamX*tamY*k] = temp; //recebe o voxel
+            for(unsigned k=0; k<tamZ; k) 
+            {
+                //O voxel a ser inserido pode estar ligado ou não
+                //A função Verificar() vai pegar a forma e ver se a partir da Coordenada inteira (i, j, k) o Voxel pertence à forma
+                //Se pertencer, ele retorna um bool true e liga, se não, o contrário
+                temp.is_on = form.Verificar(i, j, k);
+                //Recebe o voxel na posição, ligado ou não
+                H[tamX*i+j+tamX*tamY*k] = temp; 
+            }
         }
     }
 }
-void Hipermatriz::getNvertices()
+unsigned int Hipermatriz::getNfaces() const
 {
 }
-void Hipermatriz::getNfaces()
-{
-}
+
 
 
 

@@ -193,9 +193,6 @@ Coordenada Box::getCentro() const
     
     return prov;
 }
-Coordenada Box::getOrigem() const
-{
-}
 Coordenada Box::getSize() const
 {
     Coordenada prov;
@@ -204,6 +201,10 @@ Coordenada Box::getSize() const
     
     return prov;
 }
+bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k)
+{
+}
+
 
 
 
@@ -263,10 +264,6 @@ Coordenada Sphere::getCentro() const
     
     return prov;
 }
-Coordenada Sphere::getOrigem() const
-{
-
-}
 Coordenada Sphere::getSize() const
 {
     Coordenada prov;
@@ -275,9 +272,11 @@ Coordenada Sphere::getSize() const
     
     return prov;
 }
-Coordenada Sphere::getVertice() const
+bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
 {
 }
+
+
 
 
 
@@ -345,9 +344,6 @@ Coordenada Ellipsoid::getCentro() const
     
     return prov;
 }
-Coordenada Ellipsoid::getOrigem() const
-{
-}
 Coordenada Ellipsoid::getSize() const
 {
     Coordenada prov;
@@ -356,9 +352,10 @@ Coordenada Ellipsoid::getSize() const
     
     return prov;
 }
-Coordenada Ellipsoid::getVertice() const
+bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
 {
 }
+
 
 
 

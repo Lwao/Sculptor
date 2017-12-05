@@ -7,7 +7,6 @@
 using namespace std;
 
 
-
 struct Coordenada
 {
     double X, Y, Z;
@@ -41,7 +40,6 @@ public:
     virtual Coordenada getMAX() const = 0;
     virtual Coordenada getMIN() const = 0;
     virtual Coordenada getCentro() const = 0;
-    virtual Coordenada getOrigem() const =0;
     virtual Coordenada getSize() const = 0;
     
     //métodos de consulta
@@ -53,6 +51,8 @@ public:
     inline double getTransparency() {return *this->alpha;}
     inline void setColor(float r, float g, float b) { red= r; green = g; blue = b;}
     inline void setState(bool Estado) {state = Estado;}
+    
+    virtual bool Verificar(unsigned i, unsigned j, unsigned k) const = 0;
 
 };
 
@@ -75,14 +75,9 @@ public:
     Coordenada getMAX() const;
     Coordenada getMIN() const;
     Coordenada getCentro() const;
-    Coordenada getOrigem() const;
     Coordenada getSize() const;
     
-    //REGRA DE PREENCHIMENTO DO BOX//
-    // De x0 a x1 
-    // De y0 a y1 
-    // De z0 a z1 
-
+    bool Verificar(unsigned i, unsigned j, unsigned k);
 };
 
 class Sphere: public Shape
@@ -105,13 +100,9 @@ public:
     Coordenada getMAX() const;
     Coordenada getMIN() const;
     Coordenada getCentro() const;
-    Coordenada getOrigem() const;
     Coordenada getSize() const;
     
-    //REGRA DE PREENCHIMENTO DA SPHERE//
-    // De y0 a y1 
-    // De y0 a y1 
-    // De z0 a z1 
+    bool Verificar(unsigned i, unsigned j, unsigned k);
 };
 
 class Ellipsoid: public Shape
@@ -135,8 +126,9 @@ public:
     Coordenada getMAX() const;
     Coordenada getMIN() const;
     Coordenada getCentro() const;
-    Coordenada getOrigem() const;
     Coordenada getSize() const;
+    
+    bool Verificar(unsigned i, unsigned j, unsigned k);
 };
 
 

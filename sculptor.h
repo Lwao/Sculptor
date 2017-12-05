@@ -16,7 +16,7 @@ class Sculptor
 {
 private:
     list<ptr_Shape> lista; //lista de formas
-    Hipermatriz H; //matriz para armazenar as formas
+    Hipermatriz Tela; //matriz para armazenar as formas
     double R, G, B, trans; //cores a serem modificadas no setColor()
 public:
     //construtores e destrutores

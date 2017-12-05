@@ -41,9 +41,10 @@ public:
     
     
     //PARA A IMPRESSÃO
-    void getNvertices(); //pega o número de vértices de todos os voxels
-    void getNfaces(); //pega o número de faces de todos os voxels
+    inline unsigned getNvertices() const {return (tamX + 1) * (tamY + 1) * (tamZ + 1);} //pega o número de vértices de todos os voxels
+    unsigned getNfaces() const; //pega o número de faces de todos os voxels
     
+    inline Voxel & at(unsigned i, unsigned j, unsigned k) {return H.at(tamX*i + j + tamX*tamY*k);}
     
 };
 
