@@ -5,13 +5,15 @@
 #include <iomanip>
 #include <vector>
 #include <list>
+#include <math.h>
 #include "sculptor.h"
 #include "shapes.h"
 #include "s_matrix.h"
 
 using namespace std;
 
-struct Coordenada operator-(const struct Coordenada sec)
+
+Coordenada Coordenada::operator-(const Coordenada sec) const
 {
     Coordenada prov;
     
@@ -21,7 +23,7 @@ struct Coordenada operator-(const struct Coordenada sec)
     
     return prov;
 }
-struct Coordenada operator+(const struct Coordenada sec)
+Coordenada Coordenada::operator+(const Coordenada sec) const
 {
     Coordenada prov;
     
@@ -31,7 +33,7 @@ struct Coordenada operator+(const struct Coordenada sec)
     
     return prov;
 }
-struct Coordenada operator*(const double op)
+Coordenada Coordenada::operator*(const double op) const
 {
     Coordenada prov;
     
@@ -41,7 +43,7 @@ struct Coordenada operator*(const double op)
     
     return prov;
 }
-struct Coordenada operator/(const double op)
+Coordenada Coordenada::operator/(const double op) const
 {
     Coordenada prov;
     
@@ -51,9 +53,9 @@ struct Coordenada operator/(const double op)
     
     return prov;
 }
-friend bool operator==(const Coordenada op1, const Coordenada op2)
+bool igual(const Coordenada op1, const Coordenada op2)
 {
-    if ((op1.X==op2.X)&&(op1.Y==op2.Y)&&(op1.Z==op2.Z) return true;
+    if ((op1.X==op2.X)&&(op1.Y==op2.Y)&&(op1.Z==op2.Z)) return true;
     else return false;    
 }
 
@@ -116,7 +118,7 @@ vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices n
                 {
                     temp.X = EXT[i].X;
                     temp.Y = EXT[j].Y;
-                    temp.Z = EXT[k].Z
+                    temp.Z = EXT[k].Z;
                     vert.push_back(temp); 
                     count--;
                 }
@@ -127,7 +129,7 @@ vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices n
                 {
                     temp.X = EXT[i].X;
                     temp.Y = EXT[j].Y;
-                    temp.Z = EXT[k].Z
+                    temp.Z = EXT[k].Z;
                     vert.push_back(temp); 
                     count++;
                 }
@@ -141,9 +143,11 @@ vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices n
 
 //BOX
 
-Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta, double alfa, double beta)
+Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta, double alfa, double beta, double r, double g, double b, double trans, bool estado)
 {
-    Shape();
+    setColor(r, g, b, trans);
+    setAngule(teta, alfa, beta);
+    setState(estado);    
     
     x0 = xi;
     x1 = xf;
@@ -151,10 +155,7 @@ Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, doubl
     y1 = yf;
     z0 = zi;
     z1 = zf;
-    
-    tetay = teta;
-    alfaz = alfa;
-    betax = beta;
+
 }
 void Box::operator=(const Box& form)
 {
@@ -207,12 +208,14 @@ Coordenada Box::getSize() const
     return prov;
 }
 
-            bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k){
+bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k)
+{
    bool status(false);
-            if(i>= getMIN().X && i<=getMAX.X && j>=getMIN.Y && j<=getMAX.Y && k>=getMIN.Z && k>=getMAX.Z){
+    
+   if(i>= getMIN().X && i<=getMAX().X && j>=getMIN().Y && j<=getMAX().Y && k>=getMIN().Z && k>=getMAX().Z)
+   {
             status = true;
-            
-}
+   }
             return status;
 
 }
@@ -221,9 +224,11 @@ Coordenada Box::getSize() const
 
 //SPHERE
 
-Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double reed, double g, double, double trans, bool estado)
+Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double reed, double g, double b, double trans, bool estado)
 {
-    Shape();
+    setColor(reed, g, b, trans);
+    setAngule(teta, alfa, beta);
+    setState(estado); 
     
     x_c = xc;
     y_c = yc;
@@ -241,11 +246,6 @@ void Sphere::operator=(const Sphere& form)
     z_c = form.z_c;
     r = form.r;
 }
-Sphere::Sphere(const Sphere& form)
-{
-    *this = form;
-}
-
 Coordenada Sphere::getMAX() const
 {
     Coordenada prov;
@@ -284,12 +284,15 @@ Coordenada Sphere::getSize() const
     
     return prov;
 }
-  bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
-    {   // i^2+j^2+k^2<=r^2
-            bool status(false);
-            if((pow(i-getCentro.X, 2)+pow(j-getCentro.Y, 2)+ pow(k-getCentro.Z, 2))<= pow(getRaio, 2)){
-            status=true;
-}
+bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
+{   
+    // i^2+j^2+k^2<=r^2
+    bool status(false);
+           
+    if((pow(i-getCentro().X, 2)+pow(j-getCentro().Y, 2)+ pow(k-getCentro().Z, 2))<= pow(getRaio(), 2))
+    {
+        status=true;
+    }
 }
 
 
@@ -299,9 +302,11 @@ Coordenada Sphere::getSize() const
 
 //ELLIPSOID
 
-Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado)
+Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double reed, double g, double b, double trans, bool estado)
 {
-    Shape();
+    setColor(reed, g, b, trans);
+    setAngule(teta, alfa, beta);
+    setState(estado); 
     
     x_c = xc;
     y_c = yc;
@@ -310,12 +315,6 @@ Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, doub
     y_r = yr;
     z_r = zr;
     
-    tetay = teta;
-    alfaz = alfa;
-    betax = beta;
-}
-Ellipsoid::Ellipsoid(const Ellipsoid& form)
-{
 }
 void Ellipsoid::operator=(const Ellipsoid& form)
 {
@@ -330,12 +329,14 @@ Ellipsoid::Ellipsoid(const Ellipsoid& form)
 {
     *this = form;
 }
-         Coordenada Ellipsoid::getRaio() const
-    {Coordenada prov;
-            prov.X=x_r;
-            prov.Y=y_r;
-            prov.Z=z_r;
-            return prov;
+Coordenada Ellipsoid::getRaio() const
+{
+    Coordenada prov;
+    
+    prov.X=x_r;
+    prov.Y=y_r;
+    prov.Z=z_r;
+    return prov;
 }
 
 Coordenada Ellipsoid::getMAX() const
@@ -376,13 +377,15 @@ Coordenada Ellipsoid::getSize() const
     
     return prov;
 }
-  bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
+bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
+{
+    bool status(false);
+        
+    if(pow((i/getRaio().X), 2)+pow((j/getRaio().Y), 2)+ pow((k/getRaio().Z), 2)<=1)
     {
-bool status(false);
-            if(pow(i/getRaio.X, 2)+pow(j/getRaio.Y, 2)+ pow(k/getRaio.Z, 2)<=1){
             status=true;
-}
-            return status;
+    }
+    return status;
 }
 
 

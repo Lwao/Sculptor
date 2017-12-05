@@ -12,11 +12,11 @@ struct Coordenada
     double X, Y, Z;
     
     inline friend ostream & operator << (ostream & saida, const Coordenada & pos) { saida << pos.X << " " << pos.Y << " " << pos.Z; return saida; }
-    struct Coordenada operator-(const Coordenada sec) const; //permite subtrair coordenadas
-    struct Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
-    struct Coordenada operator*(const double op) const; //multiplicar por número à direita
-    struct Coordenada operator/(const double op) const;//dividir coordenadas por número
-    friend bool operator==(const Coordenada op1, const Coordenada op2);
+    Coordenada operator-(const Coordenada sec) const; //permite subtrair coordenadas
+    Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
+    Coordenada operator*(const double op) const; //multiplicar por número à direita
+    Coordenada operator/(const double op) const;//dividir coordenadas por número
+    bool igual(const Coordenada op1, const Coordenada op2);
     
 };
 
@@ -31,7 +31,7 @@ private:
     bool state; //estado, se está ligado ou não 
 public:
     //construtores e destrutores
-    inline explicit Shape(double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double a=0, bool s=false ) {tetay=teta, alfaz=alfa, betax=beta,red=r, green=g, blue=b, alpha=a, state=s;} 
+    inline explicit Shape(double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double a=0, bool s=0) {tetay=teta, alfaz=alfa, betax=beta,red=r, green=g, blue=b, alpha=a, state=s;} 
     inline ~Shape() {tetay=0, alfaz=0, betax=0, red=0, green=0, blue=0, alpha=0, state=false;}
          
     //operadores
@@ -51,8 +51,9 @@ public:
     inline double getGreen() {return green;}
     inline double getBlue() {return blue;}
     inline double getTransparency() {return alpha;}
-    inline void setColor(float r, float g, float b) { red= r; green = g; blue = b;}
+    inline void setColor(double r, double g, double b, double als) { red= r; green = g; blue = b, alpha=als;}
     inline void setState(bool Estado) {state = Estado;}
+    inline void setAngule(double te, double al, double be) {tetay=te, alfaz=al, betax=be;}
     
     virtual bool Verificar(unsigned i, unsigned j, unsigned k) const = 0;
 
@@ -64,8 +65,8 @@ private:
     double x0, x1, y0, y1, z0, z1; //coordenadas típicas de um paralelepípedo
 public:
     //construtores e destrutores
-    Box(): x0(0), x1(0), y0(0), y1(0), z0(0), z1(0), Shape() {}
-    explicit Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double trans=0, bool estado=false);
+    Box(): Shape(), x0(0), x1(0), y0(0), y1(0), z0(0), z1(0) {}
+    explicit Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta, double alfa, double beta, double r, double g, double b, double trans, bool estado);
     Box(const Box &form);
     inline ~Box() {x0=0, x1=0, y0=0, y1=0, z0=0, z1=0;}
     
@@ -90,7 +91,7 @@ private:
 public:
     //construtores e destrutores
     Sphere(): x_c(0), y_c(0), z_c(0), r(0), Shape() {}
-    explicit Sphere(double xc, double yc, double zc, double radius, double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double =0, double trans=0, bool estado=false);
+    explicit Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double reed, double g, double b, double trans, bool estado);
     Sphere(const Sphere &form);
     inline ~Sphere() {x_c=0, y_c=0, z_c=0;}
     
@@ -124,7 +125,7 @@ public:
     void operator=(const Ellipsoid &form);
     //ptr_Shape clone() const {return *this);}
     
-     Coordenada getRaio() const;
+    Coordenada getRaio() const;
     //métodos virtuais
     Coordenada getMAX() const;
     Coordenada getMIN() const;
