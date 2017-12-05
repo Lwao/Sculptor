@@ -48,7 +48,7 @@ public:
     void putEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr, double teta-y=0, double alfa-z=0, double beta-x=0);
     void cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr, double teta-y=0, double alfa-z=0, double beta-x=0);
     */
-}
+};
 
 
 #endif // _SCULPTOR_H_

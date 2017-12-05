@@ -11,38 +11,27 @@ using namespace std;
 struct Coordenada
 {
     double X, Y, Z;
-}
-
-struct Coordenada operator-(const Coordenada sec) const; //permite subtrair coordenadas
-struct Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
-struct Coordenada operator*(const double op) const; //multiplicar por número à direita
-struct Coordenada operator/(const double op) const;//dividir coordenadas por número
-
+    
+    inline friend ostream & operator << (ostream & saida, const Coordenada & pos) { saida << pos.X << " " << pos.Y << " " << pos.Z; return saida; }
+    struct Coordenada operator-(const Coordenada sec) const; //permite subtrair coordenadas
+    struct Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
+    struct Coordenada operator*(const double op) const; //multiplicar por número à direita
+    struct Coordenada operator/(const double op) const;//dividir coordenadas por número
+};
 
 class Shape;
 typedef Shape *ptr_Shape;
 
 class Shape
 {
-private:
-    //TALVEZ NÃO PRECISE DESSAS VARIÁVEIS POIS BASTA UTILIZAR OS MÉTODOS DE CONSULTA
-    
-    //Coordenada centro;
-    //Coordenada MAX; //extremos para a matriz envolvente
-    //Coordenada MIN;
-    //Coordenada Tamanho; //tamanho do Box circundante (variação)
-    //Coordenada Origem;
-        
+private:        
     double tetay, alfaz, betax; //ângulos
     double red, green, blue, alpha; //cores
     bool state; //estado, se está ligado ou não 
-    
-    //vector <Coordenada> vert; //coordenadas dos vértices do cubo envolvente (calculado por detCuboEnv()
-    Coordenada EXT[2]; //EXTREMOS, primeira entrada o ponto mínimo, segunda entrada o ponto máximo
 public:
     //construtores e destrutores
-    Shape(): red(0), green(0), blue(0), alpha(1), state(false){} 
-    inline ~Shape() {red=0, green=0, blue=0, alpha=0, state=false;}
+    inline explicit Shape(double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double a=0, bool s=false ) {tetay(teta), alfaz(alfa), betax(beta),red(r), green(g), blue(b), alpha(a), state(s);} 
+    inline ~Shape() {tetay=0, alfaz=0, betax=0, red=0, green=0, blue=0, alpha=0, state=false;}
          
     //operadores
     void operator=(const Shape &form);
@@ -62,8 +51,10 @@ public:
     inline double getGreen() {return *this->green}
     inline double getBlue() {return *this->blue;}
     inline double getTransparency() {return *this->alpha;}
-    
-}
+    inline void setColor(float r, float g, float b) { red= r; green = g; blue = b;}
+    inline void setState(bool Estado) {state = Estado;}
+
+};
 
 class Box: public Shape
 {
@@ -72,9 +63,9 @@ private:
 public:
     //construtores e destrutores
     Box(): x0(0), x1(0), y0(0), y1(0), z0(0), z1(0), Shape() {}
-    explicit Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta=0, double alfa=0, double beta=0);
+    explicit Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double trans=0, bool estado=false);
     Box(const Box &form);
-    inline ~Box() {x0=0, x1=0, y0=0, y1=0, z0=0, z1=0, tetay=0, alfaz=0, betax=0;}
+    inline ~Box() {x0=0, x1=0, y0=0, y1=0, z0=0, z1=0;}
     
     //operadores
     void operator=(const Box &form);
@@ -92,7 +83,7 @@ public:
     // De y0 a y1 
     // De z0 a z1 
 
-}
+};
 
 class Sphere: public Shape
 {
@@ -102,9 +93,9 @@ private:
 public:
     //construtores e destrutores
     Sphere(): x_c(0), y_c(0), z_c(0), r(0), Shape() {}
-    explicit Sphere(double xc, double yc, double zc, double radius, double teta=0, double alfa=0, double beta=0);
+    explicit Sphere(double xc, double yc, double zc, double radius, double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double =0, double trans=0, bool estado=false);
     Sphere(const Sphere &form);
-    inline ~Sphere() {x_c=0, y_c=0, z_c=0, tetay=0, alfaz=0, betax=0;}
+    inline ~Sphere() {x_c=0, y_c=0, z_c=0;}
     
     //operadores
     void operator=(const Sphere &form);
@@ -121,7 +112,7 @@ public:
     // De y0 a y1 
     // De y0 a y1 
     // De z0 a z1 
-}
+};
 
 class Ellipsoid: public Shape
 {
@@ -132,9 +123,9 @@ private:
 public:
     //construtores e destrutores
     Ellipsoid(): x_c(0), y_c(0), z_c(0), x_r(0), y_r(0), z_r(0), Shape() {}
-    explicit Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta=0, double alfa=0, double beta=0);
+    Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado);
     Ellipsoid(const Ellipsoid &form);
-    inline ~Ellipsoid() {x_c=0, y_c=0, z_c=0, x_r=0, y_r=0, z_r=0, tetay=0, alfaz=0, betax=0;}
+    inline ~Ellipsoid() {x_c=0, y_c=0, z_c=0, x_r=0, y_r=0, z_r=0;}
     
     //operadores
     void operator=(const Ellipsoid &form);
@@ -146,7 +137,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getOrigem() const;
     Coordenada getSize() const;
-}
+};
 
 
 

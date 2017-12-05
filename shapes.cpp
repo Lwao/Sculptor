@@ -68,6 +68,7 @@ void Shape::operator=(const Shape& form)
 
 vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices na ordem da figura da especificação
 {
+    Coordenada EXT[2];
     vector <Coordenada> vert;
     Coordenada temp;
     
@@ -208,7 +209,7 @@ Coordenada Box::getSize() const
 
 //SPHERE
 
-Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta)
+Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado)
 {
     Shape();
     
@@ -216,10 +217,6 @@ Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, doub
     y_c = yc;
     z_c = zc;
     r = radius;
-    
-    tetay = teta;
-    alfaz = alfa;
-    betax = beta;
 }
 Sphere::Sphere(const Sphere& form)
 {
@@ -286,7 +283,7 @@ Coordenada Sphere::getVertice() const
 
 //ELLIPSOID
 
-Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta)
+Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado)
 {
     Shape();
     

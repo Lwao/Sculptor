@@ -45,6 +45,6 @@ public:
     void getNfaces(); //pega o número de faces de todos os voxels
     
     
-}
+};
 
 #endif // _S_MATRIZ_H_
