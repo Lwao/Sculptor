@@ -206,11 +206,16 @@ Coordenada Box::getSize() const
     
     return prov;
 }
-bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k)
-{
+
+            bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k){
+   bool status(false);
+            if(i>= getMIN().X && i<=getMAX.X && j>=getMIN.Y && j<=getMAX.Y && k>=getMIN.Z && k>=getMAX.Z){
+            status = true;
+            
+}
+            return status;
 
 }
-
 
 
 
@@ -279,10 +284,14 @@ Coordenada Sphere::getSize() const
     
     return prov;
 }
-bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
-{
-
+  bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
+    {   // i^2+j^2+k^2<=r^2
+            bool status(false);
+            if((pow(i-getCentro.X, 2)+pow(j-getCentro.Y, 2)+ pow(k-getCentro.Z, 2))<= pow(getRaio, 2)){
+            status=true;
 }
+}
+
 
 
 
@@ -320,6 +329,13 @@ void Ellipsoid::operator=(const Ellipsoid& form)
 Ellipsoid::Ellipsoid(const Ellipsoid& form)
 {
     *this = form;
+}
+         Coordenada Ellipsoid::getRaio() const
+    {Coordenada prov;
+            prov.X=x_r;
+            prov.Y=y_r;
+            prov.Z=z_r;
+            return prov;
 }
 
 Coordenada Ellipsoid::getMAX() const
@@ -360,11 +376,14 @@ Coordenada Ellipsoid::getSize() const
     
     return prov;
 }
-bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
-{
-
+  bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
+    {
+bool status(false);
+            if(pow(i/getRaio.X, 2)+pow(j/getRaio.Y, 2)+ pow(k/getRaio.Z, 2)<=1){
+            status=true;
 }
-
+            return status;
+}
 
 
 
