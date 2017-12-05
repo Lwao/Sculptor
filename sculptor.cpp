@@ -75,6 +75,78 @@ void Sculptor::cleanVoxels()
 }
 void Sculptor::write()
 {
+    ofstream arquivo(Arq);
+    Coordenada corrente;
+    
+    corrente.X = -0.5;
+    corrente.Y = -0.5;
+    corrente.Z = -0.5;
+
+    arquivo << "OFF" << endl;
+    arquivo << getNVertices() << " " << getNFaces() << " " << 0 << endl;
+
+    for (int i = 0; i < dimX + 1; i++) 
+    {
+        for (int j = 0; j < dimY + 1; j++) 
+        {
+            for (int k = 0; k < dimZ + 1; k++) 
+            {
+                corrente.X += i;
+                corrente.Y += j;
+                corrente.Z += k;
+                
+                arquivo << corrente << endl;
+            }
+        }
+    }
+
+    
+    for (int i = 0; i < dimX; ++i) 
+    {
+        for (int j = 0; j < dimY; ++j) 
+        {
+            for (int k = 0; k < dimZ; ++k) 
+            {
+                //tamX*i + j + tamX*tamY*k
+
+                // Vértices da face X da esquerda
+            unsigned P0 = ((Tela.tamX)*i + j + (Tela.tamX)*(Tela.tamY)*(k+1));
+            unsigned P1 = ((Tela.tamX)*i + j + (Tela.tamX)*(Tela.tamY)*k);
+            unsigned P2 = ((Tela.tamX)*i + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
+            unsigned P3 = ((Tela.tamX)*i + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
+            unsigned P4 = ((Tela.tamX)*(i+1) + j + (Tela.tamX)*(Tela.tamY)*(k+1));
+            unsigned P5 = ((Tela.tamX)*(i+1) + j + (Tela.tamX)*(Tela.tamY)*k);
+            unsigned P6 = ((Tela.tamX)*(i+1) + (j+1) + (Tela.tamX)*(Tela.tamY)*k);
+            unsigned P7 = ((Tela.tamX)*(i+1) + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
+                    
+            // Pega o voxel da posição corrente
+            Voxel v = H[tamX*i + j + tamX*tamY*k];
+
+            if (v.is_on)
+            {
+                // Face da esquerda
+                if (pos.y == 0 or !at(pos.x, pos.y - 1, pos.z).is_on )
+                fout << 4 << " " << P0 << " " << P1 << " " << P2 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                // Face da esquerda
+                if (pos.y == 0 or !at(pos.x, pos.y - 1, pos.z).is_on )
+                fout << 4 << " " << P0 << " " << P1 << " " << P2 << " " << P3 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+                // Face de dentro
+                if (pos.x == 0 or !at(pos.x - 1, pos.y, pos.z).is_on )
+                fout << 4 << " " << P0 << " " << P3 << " " << P4 << " " << P5 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+                // Face de baixo
+                if (pos.z == 0 or !at(pos.x, pos.y, pos.z - 1).is_on )
+                fout << 4 << " " << P0 << " " << P5 << " " << P6 << " " << P1 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+
+                // Face da direita
+                fout << 4 << " " << P5 << " " << P4 << " " << P7 << " " << P6 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+                // Face de fora
+                fout << 4 << " " << P1 << " " << P6 << " " << P7 << " " << P2 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+                // Face de cima
+                fout << 4 << " " << P3 << " " << P2 << " " << P7 << " " << P4 << " " << v.R << " " << v.G << " " << v.B << " " << v.alpha << endl;
+            }
+            }
+        }
+    }
 }
 void Sculptor::Esculpir();
 {

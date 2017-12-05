@@ -142,30 +142,6 @@ void Hipermatriz::discretizar(const ptr_Shape& form)
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    //PREENCHENDO NA MATRIZ
-    for(unsigned i=0; i<tamX; i++)
-    {
-        for(unsigned j=0; j<tamY; j++)
-        {
-            for(unsigned k=0; k<tamZ; k++) 
-            {
-                //O voxel a ser inserido pode estar ligado ou não
-                //A função Verificar() vai pegar a forma e ver se a partir da Coordenada inteira (i, j, k) o Voxel pertence à forma
-                //Se pertencer, ele retorna um bool true e liga, se não, o contrário
-                temp.is_on = form.Verificar(i, j, k);
-                //Recebe o voxel na posição, ligado ou não
-                H[tamX*i+j+tamX*tamY*k] = temp; 
-            }
-        }
-    }
 }
 unsigned int Hipermatriz::getNfaces() const
 {
