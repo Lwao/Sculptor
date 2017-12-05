@@ -16,6 +16,8 @@ struct Coordenada
     struct Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
     struct Coordenada operator*(const double op) const; //multiplicar por número à direita
     struct Coordenada operator/(const double op) const;//dividir coordenadas por número
+    friend bool operator==(const double op);
+    
 };
 
 class Shape;

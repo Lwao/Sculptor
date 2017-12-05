@@ -36,16 +36,15 @@ void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experiment
     else {}
     
 }
-void Hipermatriz::Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size)//experimental
+void Hipermatriz::Redimensionar(ptr_Shape &form)//experimental
 {
     unsigned tX, tY, tZ;
     
-    
-    
+
     //ARREDONDANDO PARA INT
-    tX = (abs(size.X)+0.5);
-    tY = (abs(size.Y)+0.5);
-    tZ = (abs(size.Z)+0.5);
+    tX = (form->getMAX().X-origem.X+0.5);
+    tY = (form->getMAX().Y-origem.Y+0.5);
+    tZ = (form->getMAX().Z-origem.Z+0.5); 
     
     /* VÉRTICES
                       0                 4
@@ -70,21 +69,20 @@ void Hipermatriz::Redimensionar(const vector <Coordenada> &vertices, const Coord
     //P6 (MAX.x, MIN.y, MAX.z) 
     //P7 (MAX.x, MIN.y, MIN.z)
     
-    
+    //OBS, tem que ver com base na origem
     //Decidir quais eixos devem aumentar
-    if(tX>dimX) dimX=tX//redimensionar
+    //Se a posição MAX da forma em questão for maior do que o tamanho da matriz
+    //
+    if(tX>tamX) tamX=tX//redimensionar
     else{} //não redimensionar
-    if(tY>dimY) dimY=tY //redimensionar
+    if(tY>tamY) tamY=tY //redimensionar
     else{} //não redimensionar
-    if(tZ>dimZ) dimZ=tZ //redimensionar
+    if(tZ>tamZ) tamZ=tZ //redimensionar
     else{} //não redimensionar
     
     
     //Muda o tamanho da matriz (sempre crescendo)
     H.resize(dimX*dimY*dimZ);
-    
-    //Redefinir a origem
-    definirOrigem(vertices, size);
 }
 void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
 {
@@ -94,17 +92,33 @@ void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
     //Determinar cubo envolvente da forma
     temp = form->getCuboEnv();
     
-    //Ver quantos voxels equivale à forma
-    tamanho = form->getSize();
+    //Ver quantos voxels equivale à forma no tamanho máximo
+    tamanho = form->getMAX();
     
+    //Definir a origem se a forma for aditiva
+    if(form->getState()) definirOrigem(temp);
     
     //Dimensionar matriz para caber os voxels, se a forma for aditiva
-    if(form->getState()) Redimensionar(temp, tamanho);
+    if(form->getState()) Redimensionar(form);        
 }
 void Hipermatriz::discretizar(const ptr_Shape& form)
 {
     Voxel temp;
+    unsigned ix, iy, iz, fx, fy, fz;
+    unsigned i, j, k; //pega o cubo envolvente da forma
     
+    //Ver se essa forma em questão está na origem
+    //if(origem == temp[1]) 
+        
+    //Definir a distância que deve percorrer com a forma (de onde para onde na matriz)
+    //OBS: O valor é arredondado para cima por meio da soma com 0.5
+    ix = (form->getMIN().X-origem.X+0.5);
+    iy = (form->getMIN().Y-origem.Y+0.5);
+    iz = (form->getMIN().Z-origem.Z+0.5);
+    fx = (form->getMAX().X-origem.X+0.5);
+    fy = (form->getMAX().Y-origem.Y+0.5);
+    fz = (form->getMAX().Z-origem.Z+0.5);
+        
     //TIPO DE VOXEL A SER PREENCHIDO
     temp.a = form->getTransparency();
     temp.r = form->getRed();
@@ -112,15 +126,36 @@ void Hipermatriz::discretizar(const ptr_Shape& form)
     temp.b = form->getBlue();
     temp.is_on = form->getState();
     
-   
+    //PREENCHENDO NA MATRIZ
+    for(unsigned i=ix; i<fx; i++)
+    {
+        for(unsigned j=iy; j<fy; j++)
+        {
+            for(unsigned k=iz; k<fz; k++) 
+            {
+                //O voxel a ser inserido pode estar ligado ou não
+                //A função Verificar() vai pegar a forma e ver se a partir da Coordenada inteira (i, j, k) o Voxel pertence à forma
+                //Se pertencer, ele retorna um bool true e liga, se não, o contrário
+                temp.is_on = form.Verificar(i, j, k);
+                //Recebe o voxel na posição, ligado ou não
+                H[tamX*i+j+tamX*tamY*k] = temp; 
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
     
     
     //PREENCHENDO NA MATRIZ
-    for(unsigned i=0; i<tamX; i)
+    for(unsigned i=0; i<tamX; i++)
     {
-        for(unsigned j=0; j<tamY; j)
+        for(unsigned j=0; j<tamY; j++)
         {
-            for(unsigned k=0; k<tamZ; k) 
+            for(unsigned k=0; k<tamZ; k++) 
             {
                 //O voxel a ser inserido pode estar ligado ou não
                 //A função Verificar() vai pegar a forma e ver se a partir da Coordenada inteira (i, j, k) o Voxel pertence à forma

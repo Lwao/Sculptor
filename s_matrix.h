@@ -23,9 +23,8 @@ class Hipermatriz
 {
 private:
     vector <Voxels> H; //matriz de voxels
-    unsigned tamX, tamY, tamZ //coordenadas ou tamanho em voxels (int)
+    unsigned tamX, tamY, tamZ; //coordenadas ou tamanho em voxels (int)
     Coordenada origem; //coordenadas da origem no mundo (double)
-    Coordenada MAX, MIN; //máximo e mínimo nas coordenadas do mundo (double)
     unsigned qtd_formas;
 public:
     Hipermatriz(): qtd_formas(0), tamX(0), tamY(0), tamZ(0) {}
@@ -33,7 +32,7 @@ public:
     ~Hipermatriz();
     
     void definirOrigem(const vector <Coordenada> &vertices); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
-    void Redimensionar(const vector <Coordenada> &vertices, const Coordenada &size); //ao inserir uma forma (aditivamente), redimensionar 
+    void Redimensionar(ptr_Shape &form); //ao inserir uma forma (aditivamente), redimensionar 
     void inserirForma(ptr_Shape &form); //ao inserir uma forma, redimensiona a matriz
     
     //Após dimensionar a matriz considerando todas as formas

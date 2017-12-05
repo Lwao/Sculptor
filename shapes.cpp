@@ -51,6 +51,11 @@ struct Coordenada operator/(const double op)
     
     return prov;
 }
+friend bool operator==(const double op)
+{
+    if ((X==op.X)&&(Y==op.Y)&&(Z==op.Z) return true;
+    else return false;    
+}
 
 //SHAPE
 
