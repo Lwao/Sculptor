@@ -97,7 +97,7 @@ public:
     //operadores
     void operator=(const Sphere &form);
     //ptr_Shape clone() const {return *this;}
-    
+     inline double getRaio()const {return r;}
     //métodos virtuais
     Coordenada getMAX() const;
     Coordenada getMIN() const;
@@ -124,6 +124,7 @@ public:
     void operator=(const Ellipsoid &form);
     //ptr_Shape clone() const {return *this);}
     
+     Coordenada getRaio() const;
     //métodos virtuais
     Coordenada getMAX() const;
     Coordenada getMIN() const;
