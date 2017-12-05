@@ -110,14 +110,14 @@ void Sculptor::write()
                 //tamX*i + j + tamX*tamY*k
 
                 // Vértices da face X da esquerda
-                unsigned P0 = ((Tela.tamX)*i + j + (Tela.tamX)*(Tela.tamY)*(k+1));
-                unsigned P1 = ((Tela.tamX)*i + j + (Tela.tamX)*(Tela.tamY)*k);
-                unsigned P2 = ((Tela.tamX)*i + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
-                unsigned P3 = ((Tela.tamX)*i + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
-                unsigned P4 = ((Tela.tamX)*(i+1) + j + (Tela.tamX)*(Tela.tamY)*(k+1));
-                unsigned P5 = ((Tela.tamX)*(i+1) + j + (Tela.tamX)*(Tela.tamY)*k);
-                unsigned P6 = ((Tela.tamX)*(i+1) + (j+1) + (Tela.tamX)*(Tela.tamY)*k);
-                unsigned P7 = ((Tela.tamX)*(i+1) + (j+1) + (Tela.tamX)*(Tela.tamY)*(k+1));
+                unsigned P0 = ((Tela.tamX+1)*i + j + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
+                unsigned P1 = ((Tela.tamX+1)*i + j + (Tela.tamX+1)*(Tela.tamY+1)*k);
+                unsigned P2 = ((Tela.tamX+1)*i + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
+                unsigned P3 = ((Tela.tamX+1)*i + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
+                unsigned P4 = ((Tela.tamX+1)*(i+1) + j + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
+                unsigned P5 = ((Tela.tamX+1)*(i+1) + j + (Tela.tamX+1)*(Tela.tamY+1)*k);
+                unsigned P6 = ((Tela.tamX+1)*(i+1) + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*k);
+                unsigned P7 = ((Tela.tamX+1)*(i+1) + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
                         
                 // Pega o voxel da posição corrente
                 Voxel v = Tela[tamX*i + j + tamX*tamY*k];
@@ -125,23 +125,26 @@ void Sculptor::write()
                 if (v.is_on)
                 {
                     // Face da esquerda
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P0 << " " << P1 << " " << P2 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
-                    // Face da direita
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P4 << " " << P5 << " " << P6 << " " << P7 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
-                    // Face de cima
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P0 << " " << P1 << " " << P5 << " " << P4 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
-                    // Face de baixo
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P2 << " " << P3 << " " << P7 << " " << P6 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    if (i==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    arquivo << 4 << " " << P0 << " " << P1 << " " << P2 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                     // Face da frente
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P1 << " " << P2 << " " << P6 << " " << P5 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    if (z==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    arquivo << 4 << " " << P1 << " " << P2 << " " << P6 << " " << P5 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    // Face de cima
+                    if (y==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    arquivo << 4 << " " << P0 << " " << P1 << " " << P5 << " " << P4 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    
+                    // Face da direita
+                    //if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    arquivo << 4 << " " << P4 << " " << P5 << " " << P6 << " " << P7 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    
+                    // Face de baixo
+                    //if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    fout << 4 << " " << P2 << " " << P3 << " " << P7 << " " << P6 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    
                     // Face de trás
-                    if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P0 << " " << P4 << " " << P7 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    //if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    arquivo << 4 << " " << P0 << " " << P4 << " " << P7 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                 }
             }
         }

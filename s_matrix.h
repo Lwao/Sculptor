@@ -15,6 +15,14 @@ struct Voxel
     float r,g,b; // Cores
     float a; // Transparência
     bool is_on; // Incluir ou não
+    
+    Voxel (
+    float red=0.0,
+    float green=0.0,
+    float blue=0.0,
+    float alpha=1.0,
+    bool state=false
+  ) : r(red), g(green), b(blue), a(alpha), is_on(state) {}
 };
 
 typedef vector<Voxel>::iterator it_matriz;
@@ -22,7 +30,7 @@ typedef vector<Voxel>::iterator it_matriz;
 class Hipermatriz
 {
 private:
-    vector <Voxels> H; //matriz de voxels
+    vector <Voxel> H; //matriz de voxels
     unsigned tamX, tamY, tamZ; //coordenadas ou tamanho em voxels (int)
     Coordenada origem; //coordenadas da origem no mundo (double)
     unsigned qtd_formas;

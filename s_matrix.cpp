@@ -73,16 +73,13 @@ void Hipermatriz::Redimensionar(ptr_Shape &form)//experimental
     //Decidir quais eixos devem aumentar
     //Se a posição MAX da forma em questão for maior do que o tamanho da matriz
     //
-    if(tX>tamX) tamX=tX//redimensionar
-    else{} //não redimensionar
-    if(tY>tamY) tamY=tY //redimensionar
-    else{} //não redimensionar
-    if(tZ>tamZ) tamZ=tZ //redimensionar
-    else{} //não redimensionar
+    if(tX>tamX) tamX=tX; //redimensionar
+    if(tY>tamY) tamY=tY; //redimensionar
+    if(tZ>tamZ) tamZ=tZ; //redimensionar
     
     
     //Muda o tamanho da matriz (sempre crescendo)
-    H.resize(dimX*dimY*dimZ);
+    H.resize(tamX*tamY*tamZ);
 }
 void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
 {
@@ -136,15 +133,32 @@ void Hipermatriz::discretizar(const ptr_Shape& form)
                 //O voxel a ser inserido pode estar ligado ou não
                 //A função Verificar() vai pegar a forma e ver se a partir da Coordenada inteira (i, j, k) o Voxel pertence à forma
                 //Se pertencer, ele retorna um bool true e liga, se não, o contrário
-                temp.is_on = form.Verificar(i, j, k);
+                temp.is_on = form->Verificar(i, j, k);
                 //Recebe o voxel na posição, ligado ou não
-                H[tamX*i+j+tamX*tamY*k] = temp; 
+                H.at(tamX*i+j+tamX*tamY*k) = temp; 
             }
         }
     }
 }
 unsigned int Hipermatriz::getNfaces() const
 {
+    unsigned qtd(0);
+    for (int i = 0; i < tamX; ++i) 
+    {
+        for (int j = 0; j < tamY; ++j) 
+        {
+            for (int k = 0; k < tamZ; ++k) 
+            {
+    
+                // Verifica se o voxel está ativo
+                if ( H.at(tamX*i + j + tamX*tamY*k).is_on ) 
+                {
+                qtd += 6;
+                }
+            }
+        }
+    }
+    return qtd;    
 }
 
 

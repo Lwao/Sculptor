@@ -16,7 +16,7 @@ struct Coordenada
     struct Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
     struct Coordenada operator*(const double op) const; //multiplicar por número à direita
     struct Coordenada operator/(const double op) const;//dividir coordenadas por número
-    friend bool operator==(const double op);
+    friend bool operator==(const Coordenada op1, const Coordenada op2);
     
 };
 
@@ -31,12 +31,12 @@ private:
     bool state; //estado, se está ligado ou não 
 public:
     //construtores e destrutores
-    inline explicit Shape(double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double a=0, bool s=false ) {tetay(teta), alfaz(alfa), betax(beta),red(r), green(g), blue(b), alpha(a), state(s);} 
+    inline explicit Shape(double teta=0, double alfa=0, double beta=0, double r=0, double g=0, double b=0, double a=0, bool s=false ) {tetay=teta, alfaz=alfa, betax=beta,red=r, green=g, blue=b, alpha=a, state=s;} 
     inline ~Shape() {tetay=0, alfaz=0, betax=0, red=0, green=0, blue=0, alpha=0, state=false;}
          
     //operadores
     void operator=(const Shape &form);
-    virtual ptr_Shape clone() const = 0;
+    //virtual ptr_Shape clone() const = 0;
     
     //métodos virtuais abstratos
     virtual Coordenada getMAX() const = 0;
@@ -46,11 +46,11 @@ public:
     
     //métodos de consulta
     vector <Coordenada> getCuboEnv() const; //retor
-    inline bool getState() {return *this->state;}
-    inline double getRed() {return *this->red;}
-    inline double getGreen() {return *this->green}
-    inline double getBlue() {return *this->blue;}
-    inline double getTransparency() {return *this->alpha;}
+    inline bool getState() {return state;}
+    inline double getRed() {return red;}
+    inline double getGreen() {return green;}
+    inline double getBlue() {return blue;}
+    inline double getTransparency() {return alpha;}
     inline void setColor(float r, float g, float b) { red= r; green = g; blue = b;}
     inline void setState(bool Estado) {state = Estado;}
     
@@ -71,7 +71,7 @@ public:
     
     //operadores
     void operator=(const Box &form);
-    ptr_Shape clone() const {return new Box(*this);}
+    //ptr_Shape clone() const {return (*this);}
     
     //métodos virtuais
     Coordenada getMAX() const;
@@ -96,7 +96,7 @@ public:
     
     //operadores
     void operator=(const Sphere &form);
-    ptr_Shape clone() const {return new Sphere(*this);}
+    //ptr_Shape clone() const {return *this;}
     
     //métodos virtuais
     Coordenada getMAX() const;
@@ -116,13 +116,13 @@ private:
 public:
     //construtores e destrutores
     Ellipsoid(): x_c(0), y_c(0), z_c(0), x_r(0), y_r(0), z_r(0), Shape() {}
-    Ellipsoid::Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado);
+    Ellipsoid(double xc, double yc, double zc, double xr, double yr, double zr, double teta, double alfa, double beta, double reed, double g, double b, double trans, bool estado);
     Ellipsoid(const Ellipsoid &form);
     inline ~Ellipsoid() {x_c=0, y_c=0, z_c=0, x_r=0, y_r=0, z_r=0;}
     
     //operadores
     void operator=(const Ellipsoid &form);
-    ptr_Shape clone() const {return new Ellipsoid(*this);}
+    //ptr_Shape clone() const {return *this);}
     
     //métodos virtuais
     Coordenada getMAX() const;

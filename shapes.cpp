@@ -15,9 +15,9 @@ struct Coordenada operator-(const struct Coordenada sec)
 {
     Coordenada prov;
     
-    prov.X = this->X-sec.X;
-    prov.Y = this->Y-sec.Y;
-    prov.Z = this->Z-sec.Z;
+    prov.X = X-sec.X;
+    prov.Y = Y-sec.Y;
+    prov.Z = Z-sec.Z;
     
     return prov;
 }
@@ -25,9 +25,9 @@ struct Coordenada operator+(const struct Coordenada sec)
 {
     Coordenada prov;
     
-    prov.X = this->X+sec.X;
-    prov.Y = this->Y+sec.Y;
-    prov.Z = this->Z+sec.Z;
+    prov.X = X+sec.X;
+    prov.Y = Y+sec.Y;
+    prov.Z = Z+sec.Z;
     
     return prov;
 }
@@ -35,9 +35,9 @@ struct Coordenada operator*(const double op)
 {
     Coordenada prov;
     
-    prov.X = op*this->X;
-    prov.Y = op*this->Y;
-    prov.Z = op*this->Z;
+    prov.X = op*X;
+    prov.Y = op*Y;
+    prov.Z = op*Z;
     
     return prov;
 }
@@ -45,15 +45,15 @@ struct Coordenada operator/(const double op)
 {
     Coordenada prov;
     
-    prov.X = this->X/op;
-    prov.Y = this->Y/op;
-    prov.Z = this->Z/op;
+    prov.X = X/op;
+    prov.Y = Y/op;
+    prov.Z = Z/op;
     
     return prov;
 }
-friend bool operator==(const double op)
+friend bool operator==(const Coordenada op1, const Coordenada op2)
 {
-    if ((X==op.X)&&(Y==op.Y)&&(Z==op.Z) return true;
+    if ((op1.X==op2.X)&&(op1.Y==op2.Y)&&(op1.Z==op2.Z) return true;
     else return false;    
 }
 
@@ -61,14 +61,14 @@ friend bool operator==(const double op)
 
 void Shape::operator=(const Shape& form)
 {
-    *this->tetay = form.tetay;
-    *this->alfaz = form.alfaz;
-    *this->betax = form.betax;
-    *this->red = form.red;
-    *this->green = form.green;
-    *this->blue = form.blue;
-    *this->alpha = form.alpha;
-    *this->state = form.state;  
+    tetay = form.tetay;
+    alfaz = form.alfaz;
+    betax = form.betax;
+    red = form.red;
+    green = form.green;
+    blue = form.blue;
+    alpha = form.alpha;
+    state = form.state;  
 }
 
 vector <Coordenada>  Shape::getCuboEnv() const //preenche o vetor de vértices na ordem da figura da especificação
@@ -158,12 +158,12 @@ Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, doubl
 }
 void Box::operator=(const Box& form)
 {
-    *this->x0 = form.x0;
-    *this->x1 = form.x1;
-    *this->y0 = form.y0;
-    *this->y1 = form.y1;
-    *this->z0 = form.z0;
-    *this->z1 = form.z1;
+    x0 = form.x0;
+    x1 = form.x1;
+    y0 = form.y0;
+    y1 = form.y1;
+    z0 = form.z0;
+    z1 = form.z1;
 }
 Box::Box(const Box& form)
 {
@@ -194,7 +194,7 @@ Coordenada Box::getCentro() const
 {
     Coordenada prov;
     
-    prov = (*this.getMAX()+*this.getMIN())/2;
+    prov = (getMAX()+getMIN())/2;
     
     return prov;
 }
@@ -202,12 +202,13 @@ Coordenada Box::getSize() const
 {
     Coordenada prov;
     
-    prov = *this.getMAX()-*this.getMIN();
+    prov = getMAX()-getMIN();
     
     return prov;
 }
 bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k)
 {
+
 }
 
 
@@ -215,7 +216,7 @@ bool Box::Verificar(unsigned int i, unsigned int j, unsigned int k)
 
 //SPHERE
 
-Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double r, double g, double, double trans, bool estado)
+Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, double alfa, double beta, double reed, double g, double, double trans, bool estado)
 {
     Shape();
     
@@ -226,13 +227,14 @@ Sphere::Sphere(double xc, double yc, double zc, double radius, double teta, doub
 }
 Sphere::Sphere(const Sphere& form)
 {
+    *this = form;
 }
 void Sphere::operator=(const Sphere& form)
 {
-    *this->x_c = form.x_c;
-    *this->y_c = form.y_c;
-    *this->z_c = form.z_c;
-    *this->r = form.r;
+    x_c = form.x_c;
+    y_c = form.y_c;
+    z_c = form.z_c;
+    r = form.r;
 }
 Sphere::Sphere(const Sphere& form)
 {
@@ -273,12 +275,13 @@ Coordenada Sphere::getSize() const
 {
     Coordenada prov;
     
-    prov = *this.getMAX()-*this.getMIN();
+    prov = getMAX()-getMIN();
     
     return prov;
 }
 bool Sphere::Verificar(unsigned int i, unsigned int j, unsigned int k)
 {
+
 }
 
 
@@ -307,12 +310,12 @@ Ellipsoid::Ellipsoid(const Ellipsoid& form)
 }
 void Ellipsoid::operator=(const Ellipsoid& form)
 {
-    *this->x_c = form.x_c;
-    *this->y_c = form.y_c;
-    *this->z_c = form.z_c;
-    *this->x_r = form.x_r;
-    *this->y_r = form.y_r;
-    *this->z_r = form.z_r;
+    x_c = form.x_c;
+    y_c = form.y_c;
+    z_c = form.z_c;
+    x_r = form.x_r;
+    y_r = form.y_r;
+    z_r = form.z_r;
 }
 Ellipsoid::Ellipsoid(const Ellipsoid& form)
 {
@@ -353,12 +356,13 @@ Coordenada Ellipsoid::getSize() const
 {
     Coordenada prov;
     
-    prov = *this.getMAX()-*this.getMIN();
+    prov = getMAX()-getMIN();
     
     return prov;
 }
 bool Ellipsoid::Verificar(unsigned int i, unsigned int j, unsigned int k)
 {
+
 }
 
 

@@ -23,7 +23,7 @@ public:
     explicit inline Sculptor(double red=0, double green=0, double blue=0, double opacity=1): R(red), G(green), B(blue), trans(opacity) {}
     
     //métodos 
-    inline void setColor(float red, float green, float blue, float alpha) {this->R=red, this->G=green, this->B=blue, this->trans=alpha}
+    inline void setColor(float red, float green, float blue, float alpha) {this->R=red, this->G=green, this->B=blue, this->trans=alpha;}
     void putVoxel(int x, int y, int z);
     void cutVoxel(int x, int y, int z);
     void putBox(int x0, int x1, int y0, int y1, int z0, int z1);
