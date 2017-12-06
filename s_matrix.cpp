@@ -99,17 +99,13 @@ void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
     Coordenada temp;
     
     cout<<"123231"<< endl;
-    //EXT[0] = (*form).getMIN(); //preenche com a coordenada mínima
-    EXT[0].X = (*form).getMIN().X;
-    cout<<"123231"<< endl;
-    EXT[0].Y = (*form).getMIN().Y;
-    cout<<"123231"<< endl;
-    EXT[0].Z = (*form).getMIN().Z;
-    cout<<"dd11"<< endl;
+    EXT[0] = (*form).getMIN(); //preenche com a coordenada mínima
     EXT[1] = (*form).getMAX(); //preenche com a coordenada máxima
     cout<<"12222"<< endl;
     unsigned count(0);
     unsigned pos(0);
+    cout << "hai" << endl;
+    cout << (*form).getMIN().X << endl;
 
     for (int i=0; i<=1; i++)
     {
@@ -149,10 +145,15 @@ void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
     //tamanho = form->getMAX();
     cout<<"111"<< endl;
     //Definir a origem se a forma for aditiva
-    if(form->getState()) definirOrigem(vert);
+    if((*form).getState()) 
+    {
+        cout << "entrou"<< endl;
+        definirOrigem(vert);
+    }
+        
     cout<<"12"<< endl;
     //Dimensionar matriz para caber os voxels, se a forma for aditiva
-    if(form->getState()) Redimensionar(form); 
+    if((*form).getState()) Redimensionar(form); 
     cout<<"13"<< endl;
 }
 void Hipermatriz::discretizar(const ptr_Shape& form)

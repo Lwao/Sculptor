@@ -40,13 +40,10 @@ void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
     lista.push_back(new Box(x0, x1, y0, y1, z0, z1, 0, 0, 0, R, G, B, trans, ss)); 
     
     //MANDANDO A FORMA PARA SER INSERIDA
-    it_lista itt;
-    cout<<"1"<< endl;
-    itt = lista.end();
-    cout<<"2"<< endl;
-    Tela.inserirForma(*itt);
-    cout<<"3"<< endl;
-    
+    ptr_Shape x;
+    //FAZENDO UMA CÓPIA
+    x =  new Box(x0, x1, y0, y1, z0, z1, 0, 0, 0, R, G, B, trans, ss);
+    Tela.inserirForma(x);    
 }
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {

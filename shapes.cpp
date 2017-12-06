@@ -151,7 +151,6 @@ void Shape::operator=(const Shape& form)
 }*/
 
 
-
 //BOX
 
 Box::Box(double xi, double xf, double yi, double yf, double zi, double zf, double teta, double alfa, double beta, double r, double g, double b, double trans, bool estado)
@@ -198,11 +197,9 @@ Coordenada Box::getMAX() const
 Coordenada Box::getMIN() const
 {
     Coordenada prov;
-    
     prov.X = x0;
     prov.Y = y0;
     prov.Z = z0;
-    
     return prov;
 }
 Coordenada Box::getCentro() const
