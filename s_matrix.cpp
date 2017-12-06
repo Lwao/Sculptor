@@ -13,8 +13,10 @@ using namespace std;
 
 
 
-void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experimental
+void Hipermatriz::definirOrigem(const Coordenada vertices[])//experimental
 {
+    
+    
     //DEFINIÇÃO DA ORIGEM
     if(qtd_formas==0)
     {
@@ -29,11 +31,8 @@ void Hipermatriz::definirOrigem(const vector <Coordenada> &vertices)//experiment
     qtd_formas++;
     
     if(vertices[1].X<origem.X) origem.X = vertices[1].X;
-    else {}
     if(vertices[1].Y<origem.Y) origem.Y = vertices[1].Y;
-    else {}
     if(vertices[1].Z<origem.Z) origem.Z = vertices[1].Z;
-    else {}
     
 }
 void Hipermatriz::Redimensionar(ptr_Shape &form)//experimental
@@ -83,20 +82,78 @@ void Hipermatriz::Redimensionar(ptr_Shape &form)//experimental
 }
 void Hipermatriz::inserirForma(ptr_Shape &form)//experimental
 {
-    vector <Coordenada> temp;
+    //vector <Coordenada> temp;
+    //Coordenada *temp;
     Coordenada tamanho;
+    cout<<"11"<< endl;
+    
     
     //Determinar cubo envolvente da forma
-    temp = form->getCuboEnv();
+    //Ponteiro aponta para o endereço dos vértices
+    //temp = form->getCuboEnv();
+    
+    
+    //DETERMINANDO O CUBO envolvente
+    Coordenada EXT[2];
+    Coordenada vert[8];
+    Coordenada temp;
+    
+    cout<<"123231"<< endl;
+    //EXT[0] = (*form).getMIN(); //preenche com a coordenada mínima
+    EXT[0].X = (*form).getMIN().X;
+    cout<<"123231"<< endl;
+    EXT[0].Y = (*form).getMIN().Y;
+    cout<<"123231"<< endl;
+    EXT[0].Z = (*form).getMIN().Z;
+    cout<<"dd11"<< endl;
+    EXT[1] = (*form).getMAX(); //preenche com a coordenada máxima
+    cout<<"12222"<< endl;
+    unsigned count(0);
+    unsigned pos(0);
+
+    for (int i=0; i<=1; i++)
+    {
+        //for (int j=1; j>=0; j--)
+        for (int j=0; j<=1; j++)
+        {
+            if(count==2)
+            {
+                for(int k=1; k>=0; k--)
+                {
+                    temp.X = EXT[i].X;
+                    temp.Y = EXT[j+1].Y;
+                    temp.Z = EXT[k].Z;
+                    vert[pos]=temp; 
+                    pos++;
+                    count--;
+                }
+            }
+            if(count==0)
+            {
+                for(int k=0; k<=1; k++)
+                {
+                    temp.X = EXT[i].X;
+                    temp.Y = EXT[j+1].Y;
+                    temp.Z = EXT[k].Z;
+                    vert[pos]=temp; 
+                    pos++;
+                    count++;
+                }
+            }
+        }
+    }
+    cout<<"122221"<< endl;
+    
     
     //Ver quantos voxels equivale à forma no tamanho máximo
-    tamanho = form->getMAX();
-    
+    //tamanho = form->getMAX();
+    cout<<"111"<< endl;
     //Definir a origem se a forma for aditiva
-    if(form->getState()) definirOrigem(temp);
-    
+    if(form->getState()) definirOrigem(vert);
+    cout<<"12"<< endl;
     //Dimensionar matriz para caber os voxels, se a forma for aditiva
-    if(form->getState()) Redimensionar(form);        
+    if(form->getState()) Redimensionar(form); 
+    cout<<"13"<< endl;
 }
 void Hipermatriz::discretizar(const ptr_Shape& form)
 {

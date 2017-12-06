@@ -14,67 +14,101 @@ using namespace std;
 
 void Sculptor::putVoxel(int x, int y, int z)
 {
+    bool ss=true;
     //Construção de Box 1x1x1
-    lista.push_back(new Box(x/1.0-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            1)); //estado
+    lista.push_back(new Box(x-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, 0, 0, 0, R, G, B, trans, ss));
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::cutVoxel(int x, int y, int z)
-{
-    //Subtração de Box 1x1x1
-    lista.push_back(new Box(x-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            0)); //estado
+{    
+    bool ss=false;
+    //Construção de Box 1x1x1
+    lista.push_back(new Box(x-0.5, x+0.5, y-0.5, y+0.5, z-0.5, z+0.5, 0, 0, 0, R, G, B, trans, ss));
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::putBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
-    lista.push_back(new Box(x0, x1, y0, y1, z0, z1, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            1)); //estado
+    bool ss=true;
+    lista.push_back(new Box(x0, x1, y0, y1, z0, z1, 0, 0, 0, R, G, B, trans, ss)); 
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    cout<<"1"<< endl;
+    itt = lista.end();
+    cout<<"2"<< endl;
+    Tela.inserirForma(*itt);
+    cout<<"3"<< endl;
+    
 }
 void Sculptor::cutBox(int x0, int x1, int y0, int y1, int z0, int z1)
 {
-    lista.push_back(new Box(x0, x1, y0, y1, z0, z1, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            0)); //estado
+    bool ss=false;
+    lista.push_back(new Box(x0, x1, y0, y1, z0, z1, 0, 0, 0, R, G, B, trans, ss)); 
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::putSphere(int xc, int yc, int zc, int r)
 {
-    lista.push_back(new Sphere(xc, yc, zc, r, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            1)); //estado
+    bool ss=true;
+    lista.push_back(new Sphere(xc, yc, zc, r, 0, 0, 0, R, G, B, trans, ss));
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::cutSphere(int xc, int yc, int zc, int r)
 {
-    lista.push_back(new Sphere(xc, yc, zc, r, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            0)); //estado
+    bool ss=false;
+    lista.push_back(new Sphere(xc, yc, zc, r, 0, 0, 0, R, G, B, trans, ss)); 
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::putEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr)
 {
-    lista.push_back(new Ellipsoid(xc, yc, zc, xr, yr, zr, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            1)); //estado
+    bool ss=true;
+    lista.push_back(new Ellipsoid(xc, yc, zc, xr, yr, zr, 0, 0, 0, R, G, B, trans, ss)); 
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr)
 {
-    lista.push_back(new Ellipsoid(xc, yc, zc, xr, yr, zr, //posição
-                            0, 0, 0, //ângulos
-                            R, G, B, trans, //cores
-                            0)); //estado
+    bool ss=false;
+    lista.push_back(new Ellipsoid(xc, yc, zc, xr, yr, zr, 0, 0, 0, R, G, B, trans, ss)); //estado
+    
+    //MANDANDO A FORMA PARA SER INSERIDA
+    it_lista itt;
+    itt = lista.end();
+    Tela.inserirForma(*itt);
 }
 void Sculptor::cleanVoxels()
 {
 }
-void Sculptor::write()
+void Sculptor::write(const char* Arq)
 {
+    unsigned tamX, tamY, tamZ;
+    
+    tamX = Tela.getX();
+    tamY = Tela.getY();
+    tamZ = Tela.getZ();
+    
     ofstream arquivo(Arq);
     Coordenada corrente;
     
@@ -83,13 +117,13 @@ void Sculptor::write()
     corrente.Z = -0.5;
 
     arquivo << "OFF" << endl;
-    arquivo << getNVertices() << " " << getNFaces() << " " << 0 << endl;
+    arquivo << Tela.getNvertices() << " " << Tela.getNfaces() << " " << 0 << endl;
 
-    for (int i = 0; i < dimX + 1; i++) 
+    for (int i = 0; i < tamX + 1; i++) 
     {
-        for (int j = 0; j < dimY + 1; j++) 
+        for (int j = 0; j < tamY + 1; j++) 
         {
-            for (int k = 0; k < dimZ + 1; k++) 
+            for (int k = 0; k < tamZ + 1; k++) 
             {
                 corrente.X += i;
                 corrente.Y += j;
@@ -101,37 +135,37 @@ void Sculptor::write()
     }
 
     
-    for (int i = 0; i < dimX; ++i) 
+    for (int i = 0; i < tamX; ++i) 
     {
-        for (int j = 0; j < dimY; ++j) 
+        for (int j = 0; j < tamY; ++j) 
         {
-            for (int k = 0; k < dimZ; ++k) 
+            for (int k = 0; k < tamZ; ++k) 
             {
                 //tamX*i + j + tamX*tamY*k
 
                 // Vértices da face X da esquerda
-                unsigned P0 = ((Tela.tamX+1)*i + j + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
-                unsigned P1 = ((Tela.tamX+1)*i + j + (Tela.tamX+1)*(Tela.tamY+1)*k);
-                unsigned P2 = ((Tela.tamX+1)*i + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
-                unsigned P3 = ((Tela.tamX+1)*i + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
-                unsigned P4 = ((Tela.tamX+1)*(i+1) + j + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
-                unsigned P5 = ((Tela.tamX+1)*(i+1) + j + (Tela.tamX+1)*(Tela.tamY+1)*k);
-                unsigned P6 = ((Tela.tamX+1)*(i+1) + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*k);
-                unsigned P7 = ((Tela.tamX+1)*(i+1) + (j+1) + (Tela.tamX+1)*(Tela.tamY+1)*(k+1));
+                unsigned P0 = ((tamX+1)*i + j + (tamX+1)*(tamY+1)*(k+1));
+                unsigned P1 = ((tamX+1)*i + j + (tamX+1)*(tamY+1)*k);
+                unsigned P2 = ((tamX+1)*i + (j+1) + (tamX+1)*(tamY+1)*(k+1));
+                unsigned P3 = ((tamX+1)*i + (j+1) + (tamX+1)*(tamY+1)*(k+1));
+                unsigned P4 = ((tamX+1)*(i+1) + j + (tamX+1)*(tamY+1)*(k+1));
+                unsigned P5 = ((tamX+1)*(i+1) + j + (tamX+1)*(tamY+1)*k);
+                unsigned P6 = ((tamX+1)*(i+1) + (j+1) + (tamX+1)*(tamY+1)*k);
+                unsigned P7 = ((tamX+1)*(i+1) + (j+1) + (tamX+1)*(tamY+1)*(k+1));
                         
                 // Pega o voxel da posição corrente
-                Voxel v = Tela[tamX*i + j + tamX*tamY*k];
+                Voxel v = getAT(tamX*i + j + tamX*tamY*k);
 
                 if (v.is_on)
                 {
                     // Face da esquerda
-                    if (i==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    if (i==0 || (getAT(tamX*i + j + tamX*tamY*k).is_on))
                     arquivo << 4 << " " << P0 << " " << P1 << " " << P2 << " " << P3 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                     // Face da frente
-                    if (z==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    if (k==0 || (getAT(tamX*i + j + tamX*tamY*k).is_on))
                     arquivo << 4 << " " << P1 << " " << P2 << " " << P6 << " " << P5 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                     // Face de cima
-                    if (y==0 || (Tela[tamX*i + j + tamX*tamY*k].is_on))
+                    if (j==0 || (getAT(tamX*i + j + tamX*tamY*k).is_on))
                     arquivo << 4 << " " << P0 << " " << P1 << " " << P5 << " " << P4 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                     
                     // Face da direita
@@ -140,7 +174,7 @@ void Sculptor::write()
                     
                     // Face de baixo
                     //if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
-                    fout << 4 << " " << P2 << " " << P3 << " " << P7 << " " << P6 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
+                    arquivo << 4 << " " << P2 << " " << P3 << " " << P7 << " " << P6 << " " << v.r << " " << v.g << " " << v.b << " " << v.a << endl;
                     
                     // Face de trás
                     //if ((Tela[tamX*i + j + tamX*tamY*k].is_on))
@@ -150,7 +184,7 @@ void Sculptor::write()
         }
     }
 }
-void Sculptor::Esculpir();
+void Sculptor::Esculpir()
 {
     it_lista itt;
     

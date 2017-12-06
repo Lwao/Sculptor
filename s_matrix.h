@@ -37,9 +37,9 @@ private:
 public:
     Hipermatriz(): qtd_formas(0), tamX(0), tamY(0), tamZ(0) {}
     inline explicit Hipermatriz(unsigned x, unsigned y, unsigned z): tamX(x), tamY(y), tamZ(z) {}
-    ~Hipermatriz();
+    inline ~Hipermatriz() {tamX=0, tamY=0, tamZ=0, origem.X=0, origem.Y=0, origem.Z=0, qtd_formas=0;}
     
-    void definirOrigem(const vector <Coordenada> &vertices); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
+    void definirOrigem(const Coordenada vertices[]); //ao inserir uma forma (aditivamente ou subtrativamente), recalcular a origem 
     void Redimensionar(ptr_Shape &form); //ao inserir uma forma (aditivamente), redimensionar 
     void inserirForma(ptr_Shape &form); //ao inserir uma forma, redimensiona a matriz
     
@@ -50,6 +50,10 @@ public:
     //PARA A IMPRESSÃO
     inline unsigned getNvertices() const {return (tamX + 1) * (tamY + 1) * (tamZ + 1);} //pega o número de vértices de todos os voxels
     unsigned getNfaces() const; //pega o número de faces de todos os voxels
+    inline unsigned getX() const {return tamX;}
+    inline unsigned getY() const {return tamY;}
+    inline unsigned getZ() const {return tamZ;}
+    inline Voxel getVox(const unsigned p) {return H.at(p);}
     
     inline Voxel & at(unsigned i, unsigned j, unsigned k) {return H.at(tamX*i + j + tamX*tamY*k);}
     

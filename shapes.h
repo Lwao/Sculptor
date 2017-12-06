@@ -16,6 +16,7 @@ struct Coordenada
     Coordenada operator+(const Coordenada sec) const; //permite adicionar coordenadas
     Coordenada operator*(const double op) const; //multiplicar por número à direita
     Coordenada operator/(const double op) const;//dividir coordenadas por número
+    Coordenada operator=(const Coordenada sec);
     bool igual(const Coordenada op1, const Coordenada op2);
     
 };
@@ -45,12 +46,15 @@ public:
     virtual Coordenada getSize() const = 0;
     
     //métodos de consulta
-    vector <Coordenada> getCuboEnv() const; //retor
-    inline bool getState() {return state;}
-    inline double getRed() {return red;}
-    inline double getGreen() {return green;}
-    inline double getBlue() {return blue;}
-    inline double getTransparency() {return alpha;}
+    //vector <Coordenada> getCuboEnv() const; //retor
+    inline bool getState() const {return state;}
+    inline double getRed() const {return red;}
+    inline double getGreen() const {return green;}
+    inline double getBlue() const {return blue;}
+    inline double getTransparency() const {return alpha;}
+    inline double getTeta() const {return tetay;}
+    inline double getAlfa() const {return alfaz;}
+    inline double getBeta() const {return betax;}
     inline void setColor(double r, double g, double b, double als) { red= r; green = g; blue = b, alpha=als;}
     inline void setState(bool Estado) {state = Estado;}
     inline void setAngule(double te, double al, double be) {tetay=te, alfaz=al, betax=be;}
@@ -80,7 +84,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getSize() const;
     
-    bool Verificar(unsigned i, unsigned j, unsigned k);
+    bool Verificar(unsigned i, unsigned j, unsigned k) const;
 };
 
 class Sphere: public Shape
@@ -105,7 +109,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getSize() const;
     
-    bool Verificar(unsigned i, unsigned j, unsigned k);
+    bool Verificar(unsigned i, unsigned j, unsigned k) const;
 };
 
 class Ellipsoid: public Shape
@@ -132,7 +136,7 @@ public:
     Coordenada getCentro() const;
     Coordenada getSize() const;
     
-    bool Verificar(unsigned i, unsigned j, unsigned k);
+    bool Verificar(unsigned i, unsigned j, unsigned k) const;
 };
 
 

@@ -12,7 +12,7 @@ using namespace std;
 
 typedef list <ptr_Shape>::iterator it_lista; //iterador para a lista
 
-class Sculptor
+class Sculptor 
 {
 private:
     list<ptr_Shape> lista; //lista de formas
@@ -21,6 +21,7 @@ private:
 public:
     //construtores e destrutores
     explicit inline Sculptor(double red=0, double green=0, double blue=0, double opacity=1): R(red), G(green), B(blue), trans(opacity) {}
+    inline ~Sculptor() {R=0, G=0, B=0, trans=0;}
     
     //métodos 
     inline void setColor(float red, float green, float blue, float alpha) {this->R=red, this->G=green, this->B=blue, this->trans=alpha;}
@@ -33,9 +34,9 @@ public:
     void putEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
     void cutEllipsoid(int xc, int yc, int zc, int xr, int yr, int zr);
     void cleanVoxels(); //chama após discretizar todas as formas na matriz
-    void write();
+    void write(const char* Arq);
     
-    
+    inline Voxel getAT(const unsigned posi) {return Tela.Hipermatriz::getVox(posi);}
     void Esculpir(); //Manda todas as formas para terem os voxels colocados na matriz
     
     /* CASO HAJA NECESSIDADE DE DEIXAR COM OS ÂNGULOS AQUI
